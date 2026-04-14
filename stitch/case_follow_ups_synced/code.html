@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Case Follow-ups - THOZHAN</title>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            200: '#bcccdc',
+                            300: '#9fb3c8',
+                            400: '#829ab1',
+                            500: '#627d98',
+                            600: '#486581',
+                            700: '#334e68',
+                            800: '#243b53',
+                            900: '#0B2A4A', // Brand Primary
+                        },
+                        khaki: {
+                            500: '#C3B091', // Brand Accent
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="font-body antialiased text-slate-900">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-40 bg-[#0B2A4A] dark:bg-slate-950 text-[#C3B091] dark:text-[#C3B091] border-b border-navy-900 dark:border-slate-800 shadow-lg font-sans antialiased">
+<div class="flex justify-between items-center h-16 px-6">
+<div class="text-2xl font-bold tracking-tight text-[#C3B091]">THOZHAN</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-[#1a3a5a] border-none rounded-full py-1.5 pl-10 pr-4 text-sm text-white placeholder-slate-400 focus:ring-1 focus:ring-[#C3B091] w-64" placeholder="Search records..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#1a3a5a] transition-colors duration-200 p-2 rounded-full">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-[#1a3a5a] transition-colors duration-200 p-2 rounded-full">settings</span>
+<div class="h-8 w-8 rounded-full bg-[#C3B091] flex items-center justify-center text-[#0B2A4A] font-bold overflow-hidden">
+<img alt="Officer Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional police officer in a sharp dark blue uniform with gold insignia against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD8DRzliaEr1zVmv3knrLr0cnTyB3ApHkU2xeRf9AxMHpbCgmbhHfxPFtBZyclFcMIwZlGbyvVdchzukrg8yHDtdrV9BJe0bW8lpd3lPpgkynnuvCsVOTctyAHuvPmHidjs-_DjWbADQAVBQU3I-5835KkvLO7QAY5yjwyZCNJcQSyfGAhIIgOqgm9Qd5-hPaI9n3vBc4uauGXGQ91zkZ_WL-hCqGi3owD1qC9BndZvEEWMB07404qpVc5-YYz2mNPfPt4oMQGItVM"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm flex flex-col py-4 gap-1">
+<div class="px-6 py-4 mb-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-navy-900 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[#C3B091]" style="font-variation-settings: 'FILL' 1;">policy</span>
+</div>
+<div>
+<h2 class="text-sm font-bold text-navy-900 leading-tight">THOZHAN Portal</h2>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Administration System</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>FIR Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span>Case Management</span>
+</a>
+<!-- Active Navigation -->
+<a class="flex items-center gap-3 px-4 py-3 bg-[#C3B091] text-[#0B2A4A] rounded-lg mx-2 text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_late</span>
+<span>Follow-ups</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span>Officers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span>News Verification</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span>Reports</span>
+</a>
+</nav>
+<div class="px-2 pt-4 border-t border-slate-200">
+<a class="flex items-center gap-3 px-4 py-3 text-red-600 mx-2 hover:bg-red-50 transition-all text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="ml-64 mt-16 p-8 min-h-screen">
+<header class="mb-8">
+<div class="flex justify-between items-end">
+<div>
+<h1 class="text-3xl font-extrabold text-navy-900 tracking-tight">Case Follow-ups</h1>
+<p class="text-slate-500 mt-1">Track ongoing investigations, hearings, and procedural actions.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Filter Log
+                    </button>
+<button class="bg-navy-900 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-navy-800 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<!-- Section 1: Active Follow-up Log -->
+<section class="xl:col-span-8 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+<h2 class="font-bold text-navy-900 flex items-center gap-2">
+<span class="material-symbols-outlined text-navy-900">history</span>
+                        Active Follow-up Log
+                    </h2>
+<span class="text-xs font-bold px-2 py-1 bg-navy-100 text-navy-900 rounded uppercase tracking-wider">42 Total Records</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 text-[11px] uppercase tracking-wider text-slate-500 font-bold">
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4">Case ID</th>
+<th class="px-6 py-4">Officer</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Remarks</th>
+<th class="px-6 py-4 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-sm">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">24 May 2024</td>
+<td class="px-6 py-4 font-bold text-navy-900 whitespace-nowrap">FIR-2024-0892</td>
+<td class="px-6 py-4">Insp. S. Raghavan</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Investigation
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-600 line-clamp-1 max-w-[200px]">Forensic evidence submitted to lab.</td>
+<td class="px-6 py-4 text-right">
+<button class="text-navy-900 hover:text-navy-700 font-bold">View</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">23 May 2024</td>
+<td class="px-6 py-4 font-bold text-navy-900 whitespace-nowrap">FIR-2024-1104</td>
+<td class="px-6 py-4">Sub-Insp. M. Priya</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                                        Court Hearing
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-600 line-clamp-1 max-w-[200px]">Adjourned to next week for witness cross-exam.</td>
+<td class="px-6 py-4 text-right">
+<button class="text-navy-900 hover:text-navy-700 font-bold">View</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">23 May 2024</td>
+<td class="px-6 py-4 font-bold text-navy-900 whitespace-nowrap">FIR-2023-4421</td>
+<td class="px-6 py-4">Insp. K. Kumar</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                                        Summons Served
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-600 line-clamp-1 max-w-[200px]">Served to prime suspect in person.</td>
+<td class="px-6 py-4 text-right">
+<button class="text-navy-900 hover:text-navy-700 font-bold">View</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">22 May 2024</td>
+<td class="px-6 py-4 font-bold text-navy-900 whitespace-nowrap">FIR-2024-0012</td>
+<td class="px-6 py-4">Sub-Insp. R. Arul</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Investigation
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-600 line-clamp-1 max-w-[200px]">CCTV footage recovered from site.</td>
+<td class="px-6 py-4 text-right">
+<button class="text-navy-900 hover:text-navy-700 font-bold">View</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-slate-500 whitespace-nowrap">21 May 2024</td>
+<td class="px-6 py-4 font-bold text-navy-900 whitespace-nowrap">FIR-2024-1156</td>
+<td class="px-6 py-4">Insp. S. Raghavan</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                                        Court Hearing
+                                    </span>
+</td>
+<td class="px-6 py-4 text-slate-600 line-clamp-1 max-w-[200px]">Bail plea rejected by District Court.</td>
+<td class="px-6 py-4 text-right">
+<button class="text-navy-900 hover:text-navy-700 font-bold">View</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-slate-50 border-t border-slate-100 text-center">
+<button class="text-xs font-bold text-navy-900 hover:underline tracking-wider uppercase">Load More Entries</button>
+</div>
+</section>
+<!-- Section 2: Add New Follow-up Update -->
+<section class="xl:col-span-4 space-y-6">
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 bg-navy-900">
+<h2 class="font-bold text-[#C3B091] flex items-center gap-2">
+<span class="material-symbols-outlined text-[#C3B091]">add_circle</span>
+                            Add New Follow-up Update
+                        </h2>
+</div>
+<form class="p-6 space-y-4">
+<div>
+<label class="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Case ID</label>
+<select class="w-full bg-slate-50 border-slate-200 rounded-lg text-sm focus:ring-navy-900 focus:border-navy-900">
+<option>Select Active Case...</option>
+<option>FIR-2024-0892 - Petty Theft</option>
+<option>FIR-2024-1104 - Public Nuisance</option>
+<option>FIR-2023-4421 - Cyber Crime</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Follow-up Date</label>
+<input class="w-full bg-slate-50 border-slate-200 rounded-lg text-sm focus:ring-navy-900 focus:border-navy-900" type="date"/>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Status</label>
+<select class="w-full bg-slate-50 border-slate-200 rounded-lg text-sm focus:ring-navy-900 focus:border-navy-900">
+<option>Investigation</option>
+<option>Court Hearing</option>
+<option>Summons Served</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Remarks</label>
+<textarea class="w-full bg-slate-50 border-slate-200 rounded-lg text-sm focus:ring-navy-900 focus:border-navy-900 resize-none" placeholder="Enter detailed updates about the proceedings..." rows="3"></textarea>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Next Action Required</label>
+<input class="w-full bg-slate-50 border-slate-200 rounded-lg text-sm focus:ring-navy-900 focus:border-navy-900" placeholder="e.g. Await lab results, Next hearing on 30th" type="text"/>
+</div>
+<div class="pt-2">
+<button class="w-full bg-navy-900 text-[#C3B091] py-3 rounded-lg font-bold hover:bg-navy-800 transition-all flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined">save</span>
+                                Update Case Log
+                            </button>
+</div>
+</form>
+</div>
+<!-- Info Card -->
+<div class="bg-navy-900/5 border border-[#C3B091]/30 rounded-xl p-6 relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-navy-900 font-bold mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">info</span>
+                            Procedural Note
+                        </h3>
+<p class="text-slate-600 text-xs leading-relaxed">
+                            All follow-up entries are timestamped and linked to the officer's digital signature. Ensure all remarks are factual and compliant with departmental standards.
+                        </p>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-navy-900/10 text-8xl rotate-12 group-hover:rotate-0 transition-transform duration-500">gavel</span>
+</div>
+<!-- Visual Asset / Stats Card -->
+<div class="h-40 rounded-xl overflow-hidden relative group shadow-md">
+<img alt="Law Enforcement Concept" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="dramatic lighting on a wooden courtroom gavel and official documents on a dark desk with blue police light flare" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAihr5h8MP4GEovB5CiuUhmWR9JtWjiU96Fjx5iLgUBFctu2ND3E_cWJMqydA6JjgpHNORJEdtrKHV7v9SsJl9Fq0hfOnMfO2WT1j4gQgoJgysiAiozPvuEb3cFlg_u0QEYifW67ho6GzFUdd2ukVNTRqKY1FauhBIUPjbgJvRTCs7BvOrztw3khui5eaLuUb_PZxlSKwkzmnmgEvEjSYw-NKIWuB8AH76vSE2Y6xf6AQ6n-II04JuUbNWQNFcjYn9M5KPcg04GCXMD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-navy-900 to-transparent flex flex-col justify-end p-4">
+<span class="text-[#C3B091] text-2xl font-bold">12</span>
+<span class="text-white text-[10px] font-bold uppercase tracking-widest">Active Hearings This Week</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

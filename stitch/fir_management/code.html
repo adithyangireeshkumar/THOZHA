@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FIR Management | THOZHAN</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2f3131",
+                    "on-secondary-fixed-variant": "#2d486a",
+                    "primary-fixed-dim": "#d8c4a4",
+                    "on-secondary-fixed": "#001c38",
+                    "primary": "#6b5c42",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-dim": "#dadada",
+                    "surface": "#f9f9f9",
+                    "secondary-container": "#bbd6ff",
+                    "on-surface": "#1a1c1c",
+                    "on-tertiary-fixed": "#002203",
+                    "tertiary": "#2a6b2c",
+                    "on-primary-fixed": "#241a06",
+                    "surface-container-highest": "#e2e2e2",
+                    "secondary-fixed": "#d3e4ff",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#4c463d",
+                    "secondary": "#466083",
+                    "secondary-fixed-dim": "#aec8f0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#6b5c42",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#435d80",
+                    "primary-container": "#c3b091",
+                    "outline": "#7e766b",
+                    "surface-container-high": "#e8e8e8",
+                    "background": "#f9f9f9",
+                    "surface-bright": "#f9f9f9",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#50432b",
+                    "tertiary-fixed": "#acf4a4",
+                    "tertiary-container": "#7ec378",
+                    "surface-variant": "#e2e2e2",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eeeeee",
+                    "inverse-primary": "#d8c4a4",
+                    "inverse-on-surface": "#f1f1f1",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#91d78a",
+                    "on-tertiary-container": "#085014",
+                    "outline-variant": "#cfc5b9",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#0c5216",
+                    "primary-fixed": "#f5e0bf",
+                    "on-primary-fixed-variant": "#52452c",
+                    "on-background": "#1a1c1c",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cfc5b9;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-[#c3b091] dark:bg-[#6b5c42] shadow-xl z-50 py-6">
+<div class="px-6 mb-10">
+<h1 class="text-2xl font-black text-[#0b2a4a] dark:text-[#f9f9f9] tracking-tight">THOZHAN</h1>
+<p class="text-[#0b2a4a] text-xs font-medium tracking-wide uppercase opacity-70">Admin Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-4 py-3 mx-2 my-1 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-medium text-sm tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 mx-2 my-1 bg-[#466083] text-white rounded-lg active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-medium text-sm tracking-wide">FIR Management</span>
+</a>
+<a class="flex items-center px-4 py-3 mx-2 my-1 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">folder_shared</span>
+<span class="font-medium text-sm tracking-wide">Case Management</span>
+</a>
+<a class="flex items-center px-4 py-3 mx-2 my-1 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">event_note</span>
+<span class="font-medium text-sm tracking-wide">Duty Roster</span>
+</a>
+<a class="flex items-center px-4 py-3 mx-2 my-1 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-medium text-sm tracking-wide">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto space-y-4">
+<button class="w-full bg-[#0b2a4a] text-white py-3 rounded-xl font-semibold text-sm shadow-lg hover:shadow-2xl transition-all active:scale-95">
+                Emergency Dispatch
+            </button>
+<div class="pt-4 border-t border-[#0b2a4a]/10">
+<a class="flex items-center px-4 py-2 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined mr-3">help_outline</span>
+<span class="text-sm font-medium tracking-wide">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar Component -->
+<header class="flex items-center justify-between px-8 w-full h-16 sticky top-0 z-40 bg-stone-50 dark:bg-stone-900 shadow-[0px_12px_32px_rgba(11,42,74,0.04)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary md:hidden">menu</span>
+<span class="text-xl font-bold text-[#466083] dark:text-[#c3b091] font-['Inter'] tracking-tight">THOZHAN</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/15">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface w-48" placeholder="Search records..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-semibold text-on-surface-variant leading-none">Welcome, Officer</p>
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest mt-1">Badge #KP-4492</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+<img alt="Officer Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional male police officer in uniform, focused expression, neutral studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwPBr4f7qcXeLzqVu8h74GWJWFWGPkx9lvTvz3jBfaQsA1toCg0cPEwaWeyKpgT6z-e3Q8KonWAA022ELC982pFKbpaU5tkpq9owddy_jpS7YfuI77jbFs3WbKIM1FRBKJXpzNcHMlwV2lSqtVvzOEkKyEnY9Oyt1cdhUJOwxdhNyopAfiATnE5Yl_xeNWNKKY3NnDkpwo4oMhxVaoFiYbbmpTkw4e_9dxrMujmE5Jrr5CXZ_c3wEeRVNHQQ9BTWLsAcx5kW0R_Flo"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors active:scale-95" title="Logout">logout</button>
+</div>
+</div>
+</header>
+<!-- FIR Management Content -->
+<div class="p-8 space-y-8">
+<!-- Header Action Row -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-black text-on-secondary-fixed-variant tracking-tighter uppercase mb-1">FIR Management</h2>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="w-8 h-[2px] bg-primary"></span>
+<p class="text-sm font-medium">Digital Case Ledger &amp; Archives</p>
+</div>
+</div>
+<button class="bg-secondary text-on-secondary px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg hover:shadow-secondary/20 transition-all active:scale-95 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
+                    + Add New FIR
+                </button>
+</div>
+<!-- Dashboard Mini-Stats (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] border border-outline-variant/5">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Total FIRs</p>
+<h3 class="text-4xl font-black text-secondary tracking-tighter">1,284</h3>
+<div class="mt-4 flex items-center text-tertiary text-xs font-bold">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+                        +12% from last month
+                    </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] border border-outline-variant/5">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Pending Investigation</p>
+<h3 class="text-4xl font-black text-[#e67e22] tracking-tighter">42</h3>
+<div class="mt-4 flex items-center text-on-surface-variant text-xs font-medium">
+                        Active case load per officer: 3.4
+                    </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] border border-outline-variant/5">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Resolved (MTD)</p>
+<h3 class="text-4xl font-black text-tertiary tracking-tighter">156</h3>
+<div class="mt-4 flex items-center text-tertiary text-xs font-bold">
+<span class="material-symbols-outlined text-sm mr-1">check_circle</span>
+                        89% Success Rate
+                    </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] border border-outline-variant/5 relative overflow-hidden">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">System Status</p>
+<h3 class="text-xl font-bold text-secondary uppercase tracking-tight">Encrypted</h3>
+<p class="text-[10px] text-on-surface-variant mt-1">Last secure sync: 2m ago</p>
+<div class="absolute -right-4 -bottom-4 opacity-5">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+</div>
+</div>
+<!-- Main Table Section -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] overflow-hidden border border-outline-variant/10">
+<div class="px-8 py-6 border-b border-outline-variant/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h4 class="text-lg font-bold text-secondary">Recent Case Logs</h4>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1 text-xs font-bold text-on-surface-variant bg-surface-container-low px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-1 text-xs font-bold text-on-surface-variant bg-surface-container-low px-3 py-2 rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-secondary-fixed text-on-secondary-fixed">
+<th class="px-8 py-4 text-xs font-extrabold uppercase tracking-widest">FIR Number</th>
+<th class="px-8 py-4 text-xs font-extrabold uppercase tracking-widest">Date</th>
+<th class="px-8 py-4 text-xs font-extrabold uppercase tracking-widest">Crime Type</th>
+<th class="px-8 py-4 text-xs font-extrabold uppercase tracking-widest">Police Station</th>
+<th class="px-8 py-4 text-xs font-extrabold uppercase tracking-widest">Status</th>
+<th class="px-8 py-4 text-xs font-extrabold uppercase tracking-widest text-center">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5">
+<p class="font-bold text-on-secondary-fixed-variant">FIR-2024-00102</p>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1 uppercase">IPC SEC. 379</p>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-semibold text-on-surface">Oct 24, 2024</p>
+<p class="text-[10px] text-on-surface-variant">14:30 IST</p>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<p class="text-sm font-medium">Grand Larceny</p>
+</div>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium">Thiruvananthapuram Central</p>
+</td>
+<td class="px-8 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-container text-on-tertiary-container text-[10px] font-black uppercase tracking-wider">
+                                        Resolved
+                                    </span>
+</td>
+<td class="px-8 py-5 text-center">
+<button class="p-2 text-secondary hover:bg-secondary-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5">
+<p class="font-bold text-on-secondary-fixed-variant">FIR-2024-00103</p>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1 uppercase">IPC SEC. 323</p>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-semibold text-on-surface">Oct 25, 2024</p>
+<p class="text-[10px] text-on-surface-variant">09:15 IST</p>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<p class="text-sm font-medium">Public Nuisance</p>
+</div>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium">Fort Police Station</p>
+</td>
+<td class="px-8 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-[10px] font-black uppercase tracking-wider border border-orange-200">
+                                        Pending
+                                    </span>
+</td>
+<td class="px-8 py-5 text-center">
+<button class="p-2 text-secondary hover:bg-secondary-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5">
+<p class="font-bold text-on-secondary-fixed-variant">FIR-2024-00104</p>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1 uppercase">IPC SEC. 420</p>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-semibold text-on-surface">Oct 25, 2024</p>
+<p class="text-[10px] text-on-surface-variant">11:00 IST</p>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<p class="text-sm font-medium">Financial Fraud</p>
+</div>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium">Cyber Cell - HQ</p>
+</td>
+<td class="px-8 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-[10px] font-black uppercase tracking-wider border border-orange-200">
+                                        Pending
+                                    </span>
+</td>
+<td class="px-8 py-5 text-center">
+<button class="p-2 text-secondary hover:bg-secondary-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5">
+<p class="font-bold text-on-secondary-fixed-variant">FIR-2024-00105</p>
+<p class="text-[10px] text-on-surface-variant font-medium mt-1 uppercase">IPC SEC. 307</p>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-semibold text-on-surface">Oct 26, 2024</p>
+<p class="text-[10px] text-on-surface-variant">02:45 IST</p>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<p class="text-sm font-medium">Assault Attempt</p>
+</div>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium">Kovalam Station</p>
+</td>
+<td class="px-8 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-container text-on-tertiary-container text-[10px] font-black uppercase tracking-wider">
+                                        Resolved
+                                    </span>
+</td>
+<td class="px-8 py-5 text-center">
+<button class="p-2 text-secondary hover:bg-secondary-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-8 py-4 bg-surface-container-low flex items-center justify-between">
+<p class="text-xs font-bold text-on-surface-variant">Showing 1-10 of 1,284 Records</p>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-secondary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded-lg bg-secondary text-white text-xs font-bold">1</button>
+<button class="px-3 py-1 rounded-lg bg-surface-container-lowest text-on-surface text-xs font-bold hover:bg-secondary hover:text-white transition-all">2</button>
+<button class="px-3 py-1 rounded-lg bg-surface-container-lowest text-on-surface text-xs font-bold hover:bg-secondary hover:text-white transition-all">3</button>
+<button class="p-2 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-secondary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Component -->
+<footer class="flex justify-center items-center w-full mt-auto py-4 bg-[#f9f9f9] dark:bg-stone-950 border-t border-[#cfc5b9]/15">
+<div class="container mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-[#4c463d]">© 2024 Kerala Police Administration</p>
+<div class="flex gap-6">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#4c463d] hover:text-[#466083] transition-colors" href="#">Keralam — God's Own Police</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#4c463d] hover:text-[#466083] transition-colors" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

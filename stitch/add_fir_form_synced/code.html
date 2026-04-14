@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THOZHAN - Add New FIR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#435d80",
+                    "secondary-fixed": "#d3e4ff",
+                    "tertiary": "#2a6b2c",
+                    "primary": "#6b5c42",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container-high": "#e8e8e8",
+                    "on-primary-container": "#50432b",
+                    "surface-variant": "#e2e2e2",
+                    "on-tertiary-fixed-variant": "#0c5216",
+                    "tertiary-fixed": "#acf4a4",
+                    "background": "#f9f9f9",
+                    "inverse-primary": "#d8c4a4",
+                    "inverse-surface": "#2f3131",
+                    "surface": "#f9f9f9",
+                    "surface-container-low": "#f3f3f3",
+                    "inverse-on-surface": "#f1f1f1",
+                    "secondary-container": "#bbd6ff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#2d486a",
+                    "tertiary-container": "#7ec378",
+                    "surface-bright": "#f9f9f9",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#aec8f0",
+                    "on-primary-fixed-variant": "#52452c",
+                    "outline-variant": "#cfc5b9",
+                    "on-primary-fixed": "#241a06",
+                    "surface-container": "#eeeeee",
+                    "outline": "#7e766b",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#002203",
+                    "on-secondary-fixed": "#001c38",
+                    "tertiary-fixed-dim": "#91d78a",
+                    "secondary": "#466083",
+                    "primary-container": "#c3b091",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#4c463d",
+                    "surface-tint": "#6b5c42",
+                    "on-tertiary-container": "#085014",
+                    "on-surface": "#1a1c1c",
+                    "primary-fixed-dim": "#d8c4a4",
+                    "primary-fixed": "#f5e0bf",
+                    "on-background": "#1a1c1c",
+                    "surface-dim": "#dadada"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .form-input-focus:focus {
+            border-bottom-width: 2px;
+            border-color: #466083;
+            outline: none;
+        }
+        .kasavu-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30z' fill='%23c3b091' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-72 fixed left-0 top-0 overflow-y-auto bg-[#c3b091] dark:bg-[#6b5c42] text-stone-900 dark:text-stone-50 font-sans text-sm font-medium tracking-wide flex flex-col py-8 px-4 gap-y-2 shadow-xl z-50">
+<div class="px-4 mb-8 flex flex-col items-start">
+<div class="flex items-center space-x-3 mb-6">
+<img alt="Kerala Police Crest" class="w-10 h-10 rounded-full object-cover border-2 border-stone-900/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ_8EbGa_09fZosRXcfKyNsnQS785F6JVmenfGziQY6XyH6QA3tpvj1T0_d4vmUCsKQOsT98u7SvVweHfs6XEo6Mj__duWSwItvMLEBe_Ph8CElsy_u8Okk9nWQ_9Fnemup1JiApErLEUfLE9tMvMjJBTujm5W89e0QoJ_VeSxOgWV7peaIb1ND5z8Djb0MaCM-o4deYFIle24qvvlbCLca7P_1YJfcVwOKSRTNAjuayUN3_0YXRRWME_8gOf1Af14uqZtCFlK89Gm"/>
+<div>
+<h1 class="text-2xl font-black tracking-widest text-stone-900 dark:text-stone-50">THOZHAN</h1>
+<p class="text-[10px] uppercase tracking-widest opacity-60">Sovereign Custodian</p>
+</div>
+</div>
+<button class="w-full bg-[#466083] text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-transform active:scale-[0.98] shadow-sm">
+<span class="material-symbols-outlined text-xl" data-icon="add_circle">add_circle</span>
+<span>Quick Report</span>
+</button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 px-4 py-3 text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 hover:translate-x-1 transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 bg-[#466083] text-white rounded-lg shadow-inner hover:translate-x-1 transition-all duration-200 font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>FIR Management</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 hover:translate-x-1 transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span>Case Management</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 hover:translate-x-1 transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span>Follow-ups</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 hover:translate-x-1 transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="local_police">local_police</span>
+<span>Officers</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 hover:translate-x-1 transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span>News Verification</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 hover:translate-x-1 transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Reports</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<a class="flex items-center space-x-3 px-4 py-3 text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 hover:translate-x-1 transition-all rounded-lg active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col ml-72">
+<!-- TopNavBar -->
+<header class="w-full h-16 border-b-0 flex items-center justify-between px-6 sticky top-0 z-40 bg-white dark:bg-stone-900 shadow-[0px_12px_32px_rgba(11,42,74,0.04)] font-sans antialiased text-sm tracking-tight">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-[#466083]" data-icon="search">search</span>
+<input class="w-full bg-stone-50 dark:bg-stone-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-[#466083]/20 transition-all text-stone-700 dark:text-stone-300" placeholder="Search case numbers, personnel, or reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-6 ml-8">
+<div class="flex items-center space-x-2">
+<button class="p-2 text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors rounded-lg relative active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white dark:border-stone-900"></span>
+</button>
+<button class="p-2 text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors rounded-lg active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="h-6 w-[1px] bg-stone-200 dark:bg-stone-700"></div>
+<div class="flex items-center space-x-3">
+<img alt="Officer Profile Avatar" class="w-8 h-8 rounded-full object-cover ring-1 ring-stone-200 dark:ring-stone-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDflk_zzLRMWajpiOIVnidq20vDHnY62pgauzxHM9yzRbCMZD05kHUDWtkDRtQN-pwt8OFPLaVxA6KXcoWrXJxHpFXY_B8nxp8Xub6q-xnyvMjsTMGRAmX_qOFmdK__DE1eqOivgtxjjiuj4Pt1IVMX8x6I6Vs13sbc3fC5eilVAfh125sgJwDjl__1gUSMNEF19mjO1WsLNJDKpidk6Sy8pflzOX04Yofy7jEN4ftVmESJknhrCwRuq6h10GqOxLFDASIE-otd2fT3"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-10 flex-1 bg-surface-container-low overflow-y-auto">
+<div class="max-w-4xl mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex items-end justify-between border-l-4 border-primary pl-6 py-1">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Add New FIR</h2>
+<p class="text-on-surface-variant mt-1 font-medium">First Information Report Ledger</p>
+</div>
+<div class="text-right">
+<span class="text-xs font-bold uppercase tracking-widest text-primary/60 block">System Status</span>
+<span class="text-sm font-semibold text-tertiary flex items-center justify-end">
+<span class="w-2 h-2 rounded-full bg-tertiary mr-2"></span>
+                                Secure Connection Active
+                            </span>
+</div>
+</div>
+<!-- Form Card -->
+<div class="bg-surface-container-lowest shadow-[0px_12px_32px_rgba(11,42,74,0.04)] rounded-xl relative overflow-hidden p-10 kasavu-pattern">
+<div class="mb-8 flex items-center justify-between">
+<div class="flex items-center space-x-2 text-primary font-semibold">
+<span class="material-symbols-outlined" data-icon="fact_check">fact_check</span>
+<span>Official Entry Protocol</span>
+</div>
+<span class="text-xs font-medium text-error flex items-center">
+<span class="material-symbols-outlined text-[10px] mr-1" data-icon="priority_high">priority_high</span>
+                                All fields marked with * are mandatory for submission
+                            </span>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+<!-- FIR Number -->
+<div class="md:col-span-2">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">FIR Number</label>
+<div class="bg-surface-container-high px-4 py-3 rounded-lg border-b-2 border-outline-variant/20 flex justify-between items-center">
+<span class="font-mono font-bold text-secondary tracking-widest">KRP-TVM-2023-00452</span>
+<span class="text-[10px] font-bold text-on-surface-variant bg-surface-container-highest px-2 py-1 rounded">AUTO-GENERATED</span>
+</div>
+</div>
+<!-- Date Picker -->
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Date of Occurrence *</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 form-input-focus transition-all text-on-surface font-medium" type="date"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 pointer-events-none" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+<!-- Time Picker -->
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Time of Occurrence *</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 form-input-focus transition-all text-on-surface font-medium" type="time"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 pointer-events-none" data-icon="schedule">schedule</span>
+</div>
+</div>
+<!-- Crime Type -->
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Crime Type *</label>
+<select class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 form-input-focus transition-all text-on-surface font-medium appearance-none">
+<option value="">Select Crime Category</option>
+<option value="theft">Theft</option>
+<option value="assault">Assault</option>
+<option value="public_nuisance">Public Nuisance</option>
+<option value="cyber_crime">Cyber Crime</option>
+<option value="other">Other</option>
+</select>
+</div>
+<!-- IPC Section -->
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">IPC Section *</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 form-input-focus transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30" placeholder="e.g. Section 379" type="text"/>
+</div>
+<!-- Police Station -->
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Police Station Jurisdiction</label>
+<div class="relative">
+<select class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 form-input-focus transition-all text-on-surface font-medium appearance-none">
+<option value="tvm_central">Thiruvananthapuram Central</option>
+<option value="tvm_north">Thiruvananthapuram North</option>
+<option value="fort_station">Fort Station</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 pointer-events-none" data-icon="account_balance">account_balance</span>
+</div>
+</div>
+<!-- Location -->
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Location of Incident *</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 form-input-focus transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30" placeholder="Enter landmark or street" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 pointer-events-none" data-icon="location_on">location_on</span>
+</div>
+</div>
+<!-- Description -->
+<div class="md:col-span-2">
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Incident Narrative &amp; Description *</label>
+<textarea class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-4 px-4 form-input-focus transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30 resize-none" placeholder="Provide a detailed account of the reported incident as described by the complainant..." rows="6"></textarea>
+</div>
+<!-- Footer Actions -->
+<div class="md:col-span-2 flex items-center justify-between pt-8 border-t border-outline-variant/10">
+<button class="flex items-center space-x-2 text-on-surface-variant hover:text-error transition-colors font-semibold px-6 py-3 rounded-xl hover:bg-error-container/20" type="button">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+<span>Discard Entry</span>
+</button>
+<div class="flex items-center space-x-4">
+<button class="bg-primary-container text-on-primary-container font-bold px-8 py-3 rounded-xl hover:brightness-95 transition-all shadow-sm active:scale-95" type="button">
+                                        Save Draft
+                                    </button>
+<button class="bg-secondary text-on-secondary font-bold px-10 py-3 rounded-xl flex items-center space-x-3 shadow-lg hover:shadow-xl transition-all active:scale-[0.98]" type="submit">
+<span>Finalize &amp; Submit FIR</span>
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</button>
+</div>
+</div>
+</form>
+<!-- Watermark Decor -->
+<div class="absolute bottom-6 right-6 pointer-events-none opacity-[0.03]">
+<img alt="Kerala Police Logo" class="w-32 grayscale filter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEXmxE88m1tQzNsWhAVsBA3lskYg3ze7t--6VRu3LqfIqa5J7MZ7b_Hdtdu-akP8ZNbirBRRvZDZ0RiWrvtx0tvbBgq3P8qBJL2rDpleUvIx_1bZ3-A-WXED5-9oN5ZkeZLi4ziZ4lcWbS32SAlbdyz_Bi8qliXRkmYXr7_iDKOhhmsGgGDIJ4Bh1AGvMmavdN9Sy6s85wz1sHoC2vQ95hb9eZPhfXawGzjwCmjGnla7eCeB0r5K0CiXWBm1fi_iCpoX-rzeJe0dYy"/>
+</div>
+</div>
+<!-- Guidance Info -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-secondary/30">
+<div class="flex items-center space-x-3 mb-2 text-secondary">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+<span class="font-bold text-sm tracking-tight">Legal Validity</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                                Ensure all IPC sections are verified against current penal code guidelines before final submission.
+                            </p>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-primary/30">
+<div class="flex items-center space-x-3 mb-2 text-primary">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-bold text-sm tracking-tight">Data Integrity</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                                This entry will be digitally signed and timestamped under your officer credentials.
+                            </p>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-tertiary/30">
+<div class="flex items-center space-x-3 mb-2 text-tertiary">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span class="font-bold text-sm tracking-tight">Public Transparency</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                                Non-sensitive details will be automatically mirrored to the citizen portal for public lookup.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

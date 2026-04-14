@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Case Management - THOZHAN</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2f3131",
+                    "on-secondary-fixed-variant": "#2d486a",
+                    "primary-fixed-dim": "#d8c4a4",
+                    "on-secondary-fixed": "#001c38",
+                    "primary": "#6b5c42",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-dim": "#dadada",
+                    "surface": "#f9f9f9",
+                    "secondary-container": "#bbd6ff",
+                    "on-surface": "#1a1c1c",
+                    "on-tertiary-fixed": "#002203",
+                    "tertiary": "#2a6b2c",
+                    "on-primary-fixed": "#241a06",
+                    "surface-container-highest": "#e2e2e2",
+                    "secondary-fixed": "#d3e4ff",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#4c463d",
+                    "secondary": "#466083",
+                    "secondary-fixed-dim": "#aec8f0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#6b5c42",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#435d80",
+                    "primary-container": "#c3b091",
+                    "outline": "#7e766b",
+                    "surface-container-high": "#e8e8e8",
+                    "background": "#f9f9f9",
+                    "surface-bright": "#f9f9f9",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#50432b",
+                    "tertiary-fixed": "#acf4a4",
+                    "tertiary-container": "#7ec378",
+                    "surface-variant": "#e2e2e2",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eeeeee",
+                    "inverse-primary": "#d8c4a4",
+                    "inverse-on-surface": "#f1f1f1",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#91d78a",
+                    "on-tertiary-container": "#085014",
+                    "outline-variant": "#cfc5b9",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#0c5216",
+                    "primary-fixed": "#f5e0bf",
+                    "on-primary-fixed-variant": "#52452c",
+                    "on-background": "#1a1c1c",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#c3b091] dark:bg-[#6b5c42] shadow-xl flex flex-col py-6 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-2xl font-black text-[#0b2a4a] dark:text-[#f9f9f9] tracking-tight">THOZHAN</h1>
+<p class="font-['Inter'] text-sm font-medium tracking-wide text-[#0b2a4a]/70">Admin Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg mx-2 my-1 transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-['Inter'] text-sm font-medium tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center px-6 py-3 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg mx-2 my-1 transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">description</span>
+<span class="font-['Inter'] text-sm font-medium tracking-wide">FIR Management</span>
+</a>
+<!-- Active Tab: Case Management -->
+<a class="flex items-center px-6 py-3 bg-[#466083] text-white rounded-lg mx-2 my-1 transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">folder_shared</span>
+<span class="font-['Inter'] text-sm font-medium tracking-wide">Case Management</span>
+</a>
+<a class="flex items-center px-6 py-3 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg mx-2 my-1 transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">event_note</span>
+<span class="font-['Inter'] text-sm font-medium tracking-wide">Duty Roster</span>
+</a>
+<a class="flex items-center px-6 py-3 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg mx-2 my-1 transition-all active:scale-98" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-['Inter'] text-sm font-medium tracking-wide">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-[#466083] text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2 hover:bg-[#2d486a] transition-colors active:scale-95">
+<span class="material-symbols-outlined">campaign</span>
+                Emergency Dispatch
+            </button>
+<div class="mt-4 border-t border-[#0b2a4a]/10 pt-4">
+<a class="flex items-center px-6 py-2 text-[#0b2a4a] hover:bg-[#b8a383] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined mr-3">help_outline</span>
+<span class="font-['Inter'] text-sm font-medium tracking-wide">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen bg-surface">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between px-8 w-full h-16 sticky top-0 z-40 bg-stone-50 dark:bg-stone-900 shadow-[0px_12px_32px_rgba(11,42,74,0.04)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary">menu_open</span>
+<h2 class="font-['Inter'] font-semibold tracking-tight text-[#466083] dark:text-[#c3b091] text-xl">Case Management</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<input class="bg-surface-container-low border-none rounded-full px-5 py-1.5 text-sm w-64 focus:ring-2 focus:ring-secondary/20 transition-all" placeholder="Search cases, FIRs..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold text-secondary uppercase tracking-tighter">Welcome, Officer</p>
+<p class="text-[10px] text-on-surface-variant">Station: TVM-North</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Official portrait of a police officer in uniform with a neutral expression and professional lighting against a gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyXdis4RCVEK3-7dGS3012-bbxpVP6Ck6w33EgYR3R9zQlExkJvJneikszYmzb3JPZOe5_Fs634lDwxRcC0xGxI4aIIbaG_Rl6_ZLkVX1DAM5F6eTDx1che-nOQJNqB5jVn9Li77USSnfe-WeZw03DhVHXOHrgwz2oGra0bqRCMOrOK9P2DjMuI86BI6EiLuy4aZox_uNYUN5GcllzKFXatGvJY5wtL8sMHSZGOpolL5ltTeTlwH90W51wvhvZl4Bl10W4ZcOYwozF"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors">logout</button>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 space-y-8">
+<!-- Statistics Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl">folder_open</span>
+</div>
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Active Investigations</p>
+<h3 class="text-3xl font-black text-secondary tracking-tighter">142</h3>
+<div class="mt-4 flex items-center text-tertiary text-xs font-bold">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+                        +12% from last month
+                    </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] relative overflow-hidden group">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Pending Approval</p>
+<h3 class="text-3xl font-black text-primary tracking-tighter">28</h3>
+<div class="mt-4 flex items-center text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-sm mr-1">timer</span>
+                        Avg response: 4.2h
+                    </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] relative overflow-hidden group">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Cold Cases</p>
+<h3 class="text-3xl font-black text-on-secondary-fixed-variant tracking-tighter">09</h3>
+<div class="mt-4 flex items-center text-error text-xs font-bold">
+<span class="material-symbols-outlined text-sm mr-1">priority_high</span>
+                        Requires Review
+                    </div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] relative overflow-hidden group">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Closure Rate</p>
+<h3 class="text-3xl font-black text-tertiary tracking-tighter">84%</h3>
+<div class="w-full bg-surface-container-low h-1.5 rounded-full mt-4">
+<div class="bg-tertiary h-full rounded-full w-[84%]"></div>
+</div>
+</div>
+</section>
+<!-- Main Ledger (Data Table) -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] overflow-hidden">
+<div class="p-6 border-b border-outline-variant/15 flex items-center justify-between bg-surface-container-low/30">
+<div>
+<h4 class="text-lg font-bold text-on-secondary-fixed tracking-tight">Case Records Ledger</h4>
+<p class="text-sm text-on-surface-variant">Centralized investigation tracking system</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-container text-on-primary-container text-xs font-bold hover:brightness-95 transition-all">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary text-on-secondary text-xs font-bold hover:bg-on-secondary-container transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+                            New Case
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-secondary-fixed text-on-secondary-fixed text-xs font-bold uppercase tracking-wider">
+<th class="px-6 py-4">Case ID</th>
+<th class="px-6 py-4">FIR Number</th>
+<th class="px-6 py-4">Assigned Officer</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Start Date</th>
+<th class="px-6 py-4 text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-secondary font-bold">CAS-2024-0081</td>
+<td class="px-6 py-4 text-sm font-medium">FIR/TVM/2024/042</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-stone-200 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a male police officer in formal uniform looking confident" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD1gIErpRoEDjCV7dKyNHrIBJZDdWaVV-cx2Ll3wf9JvlH1vp-wJAwu6hPCCl7vlDi0iC-Pgj5E8dDHOd0YNl_2H7rAp3be-Ofd5H8u8rU3u3qT7woyZB-6JBQlwHhSsNAVMrSI7Rnd2QaHCNKKXqhkXpVUtRoG0J2bakmbAcG7JSRBJDtG4plE_HTDYwAG9u1iMbTvT_Zg95mSMWIrGtbIcQUdL5xQrnTfnWHoZDObjXibHu3uAkrKtWrB9XlWkSP1KSZrXtbF4-M"/>
+</div>
+<span class="text-sm">Insp. Rajesh Kumar</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-tertiary-container text-on-tertiary-container">
+                                        Active
+                                    </span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">12 Oct 2024</td>
+<td class="px-6 py-4">
+<div class="flex justify-center gap-2">
+<button class="p-2 rounded-lg text-secondary hover:bg-secondary/10 transition-colors active:scale-95" title="Assign">
+<span class="material-symbols-outlined text-sm">person_add</span>
+</button>
+<button class="p-2 rounded-lg text-secondary hover:bg-secondary/10 transition-colors active:scale-95" title="Update Status">
+<span class="material-symbols-outlined text-sm">sync_alt</span>
+</button>
+<button class="p-2 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container transition-colors active:scale-95" title="View Details">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-secondary font-bold">CAS-2024-0079</td>
+<td class="px-6 py-4 text-sm font-medium">FIR/TVM/2024/039</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant italic">
+<span class="material-symbols-outlined text-sm">pending</span>
+<span class="text-sm">Unassigned</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-error-container text-on-error-container">
+                                        Pending
+                                    </span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">10 Oct 2024</td>
+<td class="px-6 py-4">
+<div class="flex justify-center gap-2">
+<button class="p-2 rounded-lg text-secondary hover:bg-secondary/10 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">person_add</span>
+</button>
+<button class="p-2 rounded-lg text-secondary hover:bg-secondary/10 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">sync_alt</span>
+</button>
+<button class="p-2 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-secondary font-bold">CAS-2024-0075</td>
+<td class="px-6 py-4 text-sm font-medium">FIR/TVM/2024/035</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-stone-200 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a female police officer in uniform with a slight smile and official badges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdels3d31uXf1r9zxG3HPFpgG6sFuRdYfdc9U5k8XxWoXvFjb3rjoOA7xA68o90U69cID4-ym8rv9SNUKVwMuBkkQJkbsBw-TGSOENuKHR1U0SN0uVvJKUY5zFebFl74EkbP_NoZp-9lgNlBVJkSettWxPTzLFhflcStlJPH4Ens2EC6tddhN9SJnf0S1o9Cy2UUWHgNYvKETy6-osltgNwS98VBo1PQizx_xMc4k_bSjyuEuDfakJhYyYLX6hjgBadudxfyM4GmwD"/>
+</div>
+<span class="text-sm">Sub-Insp. Meera S.</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-surface-container-highest text-on-surface-variant">
+                                        Closed
+                                    </span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">05 Oct 2024</td>
+<td class="px-6 py-4">
+<div class="flex justify-center gap-2">
+<button class="p-2 rounded-lg text-outline opacity-30 cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-sm">person_add</span>
+</button>
+<button class="p-2 rounded-lg text-secondary hover:bg-secondary/10 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">sync_alt</span>
+</button>
+<button class="p-2 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-secondary font-bold">CAS-2024-0072</td>
+<td class="px-6 py-4 text-sm font-medium">FIR/TVM/2024/032</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-stone-200 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a senior male police officer with graying hair and decorated uniform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwCBNoK4TYNr_8YblEgYlusL-DlvUQ6qI8_o3DAKl8tBrDte8Cpn5-Y5NrtUe9p-LgsgE2GvXXDw9oIbnhgF84O0qG5lJUDnm_OtZCu4j2Gh_A--4yBQMUyKj38t9pCA6hco7oZvZfOvdDnWncV1rPQF_JH2Dbm7fHE0szgngx4RV0KYP7nkqPjFea80p-A67BiBrZD1GSkc8mAKJDoR2mxT7AUS5Bg3WSXxmCKGrvJk_MlLefDD3_b2QmAwC1Yq3XQI4jnSj1KRwl"/>
+</div>
+<span class="text-sm">ACP Vinod Nair</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-primary-container text-on-primary-container">
+                                        Investigation
+                                    </span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">01 Oct 2024</td>
+<td class="px-6 py-4">
+<div class="flex justify-center gap-2">
+<button class="p-2 rounded-lg text-secondary hover:bg-secondary/10 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">person_add</span>
+</button>
+<button class="p-2 rounded-lg text-secondary hover:bg-secondary/10 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">sync_alt</span>
+</button>
+<button class="p-2 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container-low/30 flex items-center justify-between border-t border-outline-variant/10">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-medium">Showing 1-4 of 142 records</p>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-outline-variant/20 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="p-2 rounded-lg border border-outline-variant/20 bg-secondary text-on-secondary">
+<span class="text-xs font-bold">1</span>
+</button>
+<button class="p-2 rounded-lg border border-outline-variant/20 hover:bg-surface-container-high transition-colors">
+<span class="text-xs font-bold">2</span>
+</button>
+<button class="p-2 rounded-lg border border-outline-variant/20 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Asymmetric Utility Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Case Progress Visualizer -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)]">
+<h4 class="text-sm font-bold text-secondary uppercase tracking-widest mb-6">Case Resolution Timeline</h4>
+<div class="space-y-6">
+<div class="relative pl-8 border-l-2 border-primary/20">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-surface"></div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold">Evidence Collection</span>
+<span class="text-xs font-medium text-tertiary">Completed</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">Forensic reports uploaded for CAS-2024-0081</p>
+</div>
+<div class="relative pl-8 border-l-2 border-secondary/20">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-secondary border-4 border-surface animate-pulse"></div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold">Interrogation Phase</span>
+<span class="text-xs font-medium text-primary">In Progress</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">Suspect questioning scheduled for tomorrow, 10:00 AM</p>
+</div>
+<div class="relative pl-8 border-l-2 border-outline-variant/20 opacity-50">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-outline-variant border-4 border-surface"></div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold">Charge Sheet Filing</span>
+<span class="text-xs font-medium">Scheduled</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">Pending legal advisor clearance</p>
+</div>
+</div>
+</div>
+<!-- Action Hub -->
+<div class="bg-on-secondary-fixed text-on-secondary rounded-xl p-6 shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-7xl">shield</span>
+</div>
+<h4 class="text-sm font-bold uppercase tracking-widest mb-4">Quick Protocols</h4>
+<div class="space-y-3">
+<button class="w-full bg-secondary/50 border border-secondary text-left px-4 py-3 rounded-xl flex items-center justify-between group hover:bg-secondary transition-all">
+<span class="text-sm font-medium">Issue Summon Order</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward_ios</span>
+</button>
+<button class="w-full bg-secondary/50 border border-secondary text-left px-4 py-3 rounded-xl flex items-center justify-between group hover:bg-secondary transition-all">
+<span class="text-sm font-medium">Request Warrant</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward_ios</span>
+</button>
+<button class="w-full bg-primary text-white text-left px-4 py-3 rounded-xl flex items-center justify-between group hover:bg-primary/80 transition-all">
+<span class="text-sm font-bold">Escalate High Profile Case</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">gavel</span>
+</button>
+</div>
+<div class="mt-8 pt-6 border-t border-white/10">
+<p class="text-[10px] uppercase tracking-tighter opacity-60 mb-2">Internal Policy</p>
+<p class="text-xs leading-relaxed italic opacity-80">"Ensure all case diaries are updated within 24 hours of investigation milestones as per State Police manual."</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="flex justify-center items-center w-full mt-auto bg-[#f9f9f9] dark:bg-stone-950 py-4 border-t border-[#cfc5b9]/15">
+<div class="flex flex-col items-center gap-1">
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-[#4c463d]">© 2024 Kerala Police Administration</p>
+<div class="flex gap-4">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-[#4c463d] hover:text-[#466083] transition-colors" href="#">Keralam — God's Own Police</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>
