@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THOZHAN | Secure Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3131",
+                        "on-secondary-fixed-variant": "#2d486a",
+                        "primary-fixed-dim": "#d8c4a4",
+                        "on-secondary-fixed": "#001c38",
+                        "primary": "#6b5c42",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-dim": "#dadada",
+                        "surface": "#f9f9f9",
+                        "secondary-container": "#bbd6ff",
+                        "on-surface": "#1a1c1c",
+                        "on-tertiary-fixed": "#002203",
+                        "tertiary": "#2a6b2c",
+                        "on-primary-fixed": "#241a06",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-fixed": "#d3e4ff",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#4c463d",
+                        "secondary": "#466083",
+                        "secondary-fixed-dim": "#aec8f0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#6b5c42",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#435d80",
+                        "primary-container": "#c3b091",
+                        "outline": "#7e766b",
+                        "surface-container-high": "#e8e8e8",
+                        "background": "#f9f9f9",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#50432b",
+                        "tertiary-fixed": "#acf4a4",
+                        "tertiary-container": "#7ec378",
+                        "surface-variant": "#e2e2e2",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eeeeee",
+                        "inverse-primary": "#d8c4a4",
+                        "inverse-on-surface": "#f1f1f1",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#91d78a",
+                        "on-tertiary-container": "#085014",
+                        "outline-variant": "#cfc5b9",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#0c5216",
+                        "primary-fixed": "#f5e0bf",
+                        "on-primary-fixed-variant": "#52452c",
+                        "on-background": "#1a1c1c",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .login-canvas {
+            background: radial-gradient(circle at top right, #f3f3f3 0%, #f9f9f9 100%);
+        }
+        .kasavu-accent {
+            background: linear-gradient(90deg, transparent 0%, #cfc5b9 50%, transparent 100%);
+            height: 1px;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<main class="min-h-screen flex flex-col items-center justify-center p-6 login-canvas relative overflow-hidden">
+<!-- Subtle Decorative Element -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-primary-container to-secondary opacity-30"></div>
+<!-- Login Card Container -->
+<div class="w-full max-w-md">
+<!-- Logo Section -->
+<div class="flex flex-col items-center mb-10">
+<div class="w-16 h-16 mb-4 flex items-center justify-center bg-white rounded-full shadow-[0px_12px_32px_rgba(11,42,74,0.06)]">
+<img alt="Kerala Police Crest" class="w-12 h-12 object-contain" data-alt="Official Kerala Police emblem featuring two elephants and the state seal in gold and red tones on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6TPOYhgltPlnR6qsorV4lKmYfer0OL-XK_6OVHScj2CuDzxd5QmT21miIYZ0LaDMRjYvreCIbI9xXamuY1JgW8O2y94yQixwopW3e6VpZW0GZwLkOp3lTbhM1uQAYl_zPLX4n_YHVbaKpt9Kr480MVsTXaNi0onZybHHiHiI_IVMqJlS5-LDG7INDE5Bdq4iL4D2cuWlWS2CyEKVmV7C4tkLeHeyMiiQQmkGGZxChMPB_LApwzKmbL9lJ2CKkrX4KzCQuMeE0J8CG"/>
+</div>
+<h1 class="text-3xl font-black tracking-tighter text-secondary font-headline">THOZHAN</h1>
+<p class="text-on-surface-variant text-xs uppercase tracking-[0.2em] font-semibold mt-1">Keralam — God's Own Police</p>
+</div>
+<!-- Authentication Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_12px_48px_rgba(11,42,74,0.04)] overflow-hidden">
+<div class="p-8 md:p-10">
+<div class="mb-8">
+<h2 class="text-xl font-bold text-on-surface tracking-tight">Secure Administration Portal</h2>
+<p class="text-on-surface-variant text-sm mt-1">Please authenticate to access the sovereign ledger.</p>
+</div>
+<!-- Step 1: Federated Identity -->
+<div class="space-y-4">
+<button class="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white border border-outline-variant/30 rounded-xl hover:bg-surface-container-low transition-all duration-200 active:scale-[0.98] group">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.65l-3.57-2.77c-1 .67-2.28 1.07-3.71 1.07-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.12c-.22-.66-.35-1.36-.35-2.12s.13-1.46.35-2.12V7.04H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.96l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.04l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="text-sm font-semibold text-on-surface">Continue with Google</span>
+</button>
+<div class="relative flex items-center justify-center py-2">
+<div class="kasavu-accent w-full"></div>
+<span class="absolute bg-surface-container-lowest px-4 text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">OR</span>
+</div>
+<!-- Step 2: Officer Verification -->
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1" for="officer-id">
+                                    Officer ID
+                                </label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">badge</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border-b-2 border-transparent focus:border-secondary focus:ring-0 transition-all duration-300 text-sm font-medium placeholder:text-outline/50 rounded-lg" id="officer-id" placeholder="Enter UID-XXXX-XXXX" type="text"/>
+</div>
+</div>
+<button class="w-full py-4 px-6 bg-secondary text-on-secondary rounded-xl font-bold text-sm tracking-wide shadow-lg shadow-secondary/20 hover:bg-on-secondary-fixed-variant transition-all duration-300 active:scale-[0.97] flex items-center justify-center gap-2">
+                                Verify Identity
+                                <span class="material-symbols-outlined text-lg">verified_user</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer within card -->
+<div class="bg-surface-container-low/50 px-8 py-4 flex items-center justify-center gap-2 border-t border-outline-variant/10">
+<span class="material-symbols-outlined text-sm text-secondary">security</span>
+<p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">End-to-End Encrypted Session</p>
+</div>
+</div>
+<!-- Global Footer -->
+<footer class="mt-12 text-center">
+<p class="text-[11px] text-on-surface-variant uppercase tracking-[0.2em] font-medium opacity-60 mb-2">
+                    Security Notice
+                </p>
+<p class="text-xs text-on-surface-variant leading-relaxed max-w-xs mx-auto">
+                    Authorized use only. All actions are logged and subject to monitoring under the Kerala Police IT Protocol.
+                </p>
+<div class="mt-8 flex justify-center items-center gap-6">
+<a class="text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-secondary font-bold transition-colors" href="#">Help Desk</a>
+<div class="w-1 h-1 bg-outline-variant rounded-full"></div>
+<a class="text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-secondary font-bold transition-colors" href="#">Privacy Policy</a>
+</div>
+<div class="mt-12 flex justify-center opacity-20 grayscale">
+<div class="h-8 w-px bg-on-surface-variant"></div>
+</div>
+<p class="mt-4 text-[10px] text-on-surface-variant/40 font-bold tracking-widest uppercase">
+                    © 2024 Kerala Police Administration
+                </p>
+</footer>
+</div>
+<!-- Background Watermark -->
+<div class="fixed -bottom-24 -right-24 opacity-[0.03] pointer-events-none select-none">
+<span class="material-symbols-outlined text-[400px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THOZHAN | Analytics &amp; Reports</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0B2A4A",
+                        accent: "#C3B091",
+                        success: "#1B5E20",
+                        error: "#C62828",
+                        secondary: "#466083"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter", "Public Sans", "sans-serif"],
+                        "body": ["Inter", "Public Sans", "sans-serif"],
+                        "label": ["Inter", "Public Sans", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+<!-- SideNavBar (Updated to match SCREEN_22 style) -->
+<aside class="h-screen w-72 fixed left-0 top-0 bg-[#c3b091] dark:bg-[#6b5c42] flex flex-col py-8 px-4 gap-y-2 shadow-xl z-50 overflow-y-auto custom-scrollbar hidden md:flex">
+<div class="px-2 mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h1 class="text-2xl font-black tracking-widest text-stone-900 dark:text-stone-50 leading-none">THOZHAN</h1>
+<p class="font-sans text-xs font-bold uppercase tracking-wider text-stone-900/60 dark:text-stone-50/60 mt-1">Sovereign Custodian</p>
+</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 font-sans text-sm font-medium tracking-wide px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 font-sans text-sm font-medium tracking-wide px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>FIR Management</span>
+</a>
+<a class="text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 font-sans text-sm font-medium tracking-wide px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span>Case Management</span>
+</a>
+<a class="text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 font-sans text-sm font-medium tracking-wide px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span>Follow-ups</span>
+</a>
+<a class="text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 font-sans text-sm font-medium tracking-wide px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">local_police</span>
+<span>Officers</span>
+</a>
+<a class="text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 font-sans text-sm font-medium tracking-wide px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span>News Verification</span>
+</a>
+<!-- Active Tab: Reports -->
+<a class="bg-[#466083] text-white rounded-lg shadow-inner font-sans text-sm font-medium tracking-wide px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span>Reports</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-black/5 space-y-2">
+<button class="w-full bg-[#0b2a4a] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all mb-4">
+<span class="material-symbols-outlined">emergency</span>
+                Emergency Dispatch
+            </button>
+<a class="text-stone-800 dark:text-stone-200 hover:bg-stone-300/30 dark:hover:bg-stone-700/30 font-sans text-sm font-medium tracking-wide px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-error">logout</span>
+<span class="text-error">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center px-6 py-3 w-full sticky top-0 z-50 bg-[#0B2A4A] dark:bg-slate-950 text-[#C3B091] border-b border-[#C3B091]/20 shadow-lg font-sans tracking-tight">
+<div class="flex items-center gap-4">
+<span class="md:hidden material-symbols-outlined text-white">menu</span>
+<span class="text-2xl font-black text-[#C3B091] tracking-wider uppercase">THOZHAN</span>
+</div>
+<div class="flex-1 max-w-md mx-8 hidden md:block">
+<div class="relative">
+<input class="w-full bg-[#C3B091]/10 border border-[#C3B091]/30 rounded-full py-1.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#C3B091]" placeholder="Search reports, cases, or officers..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1.5 text-sm text-[#C3B091]/60">search</span>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="material-symbols-outlined text-[#C3B091]/80 hover:bg-[#C3B091]/10 hover:text-white transition-colors p-2 rounded-full">notifications</button>
+<button class="material-symbols-outlined text-[#C3B091]/80 hover:bg-[#C3B091]/10 hover:text-white transition-colors p-2 rounded-full">settings</button>
+<button class="material-symbols-outlined text-[#C3B091]/80 hover:bg-[#C3B091]/10 hover:text-white transition-colors p-2 rounded-full">help</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-[#C3B091]/40">
+<img class="h-full w-full object-cover" data-alt="professional portrait of a senior police officer in uniform with a focused and serious expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg7zq7At7Qpa0hZtawomvcCyrjKlLUkmM7Td5cVJoSIGG2OfltTYz81Gs8RIC4NflS-DV309EsUVzqAkhnnDsm9e53Qo83_DuHfs5I0vsK6RlygbCWXqhuxXdUJY8VT3ksRxCjVVTZa3g2haViGJ9Iqb67qEtbhNaR5FQeKKFSu3sURts3SL4RYp5VegZ4SE_PxYw-OjyKj5VOi4WFEmLU-xadNX-lP_kfOg0vQxc26_xQVnK6ZcA4EwtSnWuLXwxbWaTB2lc-OEnA"/>
+</div>
+</div>
+</header>
+<!-- Page Body -->
+<div class="p-6 space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-extrabold text-primary tracking-tight">Departmental Analytics</h2>
+<p class="text-slate-500 font-medium">Real-time performance metrics and crime statistics for the Kerala Police Department.</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-white border border-slate-200 px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-bold text-slate-700 hover:bg-slate-50 shadow-sm transition-all">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+                        Last 30 Days
+                    </button>
+<button class="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-bold shadow-md hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Export PDF
+                    </button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white p-6 rounded-xl border-l-4 border-primary shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-primary/10 text-primary rounded-lg material-symbols-outlined">description</span>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Cases</span>
+</div>
+<div class="text-3xl font-black text-slate-800">12,482</div>
+<div class="mt-2 text-xs font-bold text-success flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                        +4.2% from last month
+                    </div>
+</div>
+<div class="bg-white p-6 rounded-xl border-l-4 border-success shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-success/10 text-success rounded-lg material-symbols-outlined">task_alt</span>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Resolved</span>
+</div>
+<div class="text-3xl font-black text-slate-800">9,105</div>
+<div class="mt-2 text-xs font-bold text-success flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+                        73% Resolution Rate
+                    </div>
+</div>
+<div class="bg-white p-6 rounded-xl border-l-4 border-error shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-error/10 text-error rounded-lg material-symbols-outlined">pending_actions</span>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Pending</span>
+</div>
+<div class="text-3xl font-black text-slate-800">3,377</div>
+<div class="mt-2 text-xs font-bold text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">priority_high</span>
+                        128 Urgent Escalations
+                    </div>
+</div>
+<div class="bg-white p-6 rounded-xl border-l-4 border-accent shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-accent/10 text-accent rounded-lg material-symbols-outlined">fact_check</span>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">News Verified</span>
+</div>
+<div class="text-3xl font-black text-slate-800">856</div>
+<div class="mt-2 text-xs font-bold text-slate-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">verified</span>
+                        98% Authenticity Score
+                    </div>
+</div>
+</div>
+<!-- Main Analytics Bento Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Monthly FIR Trends -->
+<div class="col-span-12 lg:col-span-8 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+                            Monthly FIR Trends
+                        </h3>
+<div class="flex gap-4 text-xs font-bold uppercase tracking-tighter">
+<span class="flex items-center gap-1 text-primary"><span class="w-3 h-3 bg-primary rounded-full"></span> 2024</span>
+<span class="flex items-center gap-1 text-slate-400"><span class="w-3 h-3 bg-slate-200 rounded-full"></span> 2023</span>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-2 px-2 border-b border-slate-100">
+<div class="w-full bg-slate-50 relative group">
+<div class="absolute bottom-0 w-full bg-slate-200 h-[40%] rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[55%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 uppercase">Jan</span>
+</div>
+<div class="w-full bg-slate-50 relative group">
+<div class="absolute bottom-0 w-full bg-slate-200 h-[45%] rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[65%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 uppercase">Feb</span>
+</div>
+<div class="w-full bg-slate-50 relative group">
+<div class="absolute bottom-0 w-full bg-slate-200 h-[35%] rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[50%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 uppercase">Mar</span>
+</div>
+<div class="w-full bg-slate-50 relative group">
+<div class="absolute bottom-0 w-full bg-slate-200 h-[60%] rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[85%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 uppercase">Apr</span>
+</div>
+<div class="w-full bg-slate-50 relative group">
+<div class="absolute bottom-0 w-full bg-slate-200 h-[50%] rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[70%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 uppercase">May</span>
+</div>
+<div class="w-full bg-slate-50 relative group">
+<div class="absolute bottom-0 w-full bg-slate-200 h-[55%] rounded-t-sm"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[90%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 uppercase">Jun</span>
+</div>
+</div>
+<div class="mt-10 flex justify-center">
+<p class="text-xs font-medium text-slate-500 italic">Data reflecting registered FIRs across all metropolitan zones.</p>
+</div>
+</div>
+<!-- Case Status Distribution -->
+<div class="col-span-12 lg:col-span-4 bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col">
+<h3 class="font-bold text-slate-800 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-accent">pie_chart</span>
+                        Case Status
+                    </h3>
+<div class="flex-1 flex flex-col justify-center items-center">
+<div class="relative w-48 h-48 mb-6">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#f1f5f9" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#1B5E20" stroke-dasharray="73, 100" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#C62828" stroke-dasharray="15, 100" stroke-dashoffset="-73" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#C3B091" stroke-dasharray="12, 100" stroke-dashoffset="-88" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-black text-slate-800">73%</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Resolved</span>
+</div>
+</div>
+<div class="w-full space-y-2">
+<div class="flex justify-between items-center text-xs font-bold">
+<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span> Resolved</span>
+<span class="text-slate-600">9,105</span>
+</div>
+<div class="flex justify-between items-center text-xs font-bold">
+<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-error"></span> Ongoing</span>
+<span class="text-slate-600">2,112</span>
+</div>
+<div class="flex justify-between items-center text-xs font-bold">
+<span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-accent"></span> Cold Case</span>
+<span class="text-slate-600">1,265</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cases by Crime Type -->
+<div class="col-span-12 lg:col-span-5 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+<h3 class="font-bold text-slate-800 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">equalizer</span>
+                        Crime Categorization
+                    </h3>
+<div class="space-y-5">
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+<span>Cyber Fraud</span>
+<span>2,410</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+<span>Theft &amp; Larceny</span>
+<span>1,825</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+<span>Physical Assault</span>
+<span>942</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[40%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+<span>Narcotics</span>
+<span>615</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[25%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+<span>Others</span>
+<span>312</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[15%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Station Performance Table -->
+<div class="col-span-12 lg:col-span-7 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">home_work</span>
+                            Station Performance
+                        </h3>
+<a class="text-xs font-bold text-primary hover:underline" href="#">View All Stations</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">
+<th class="pb-3 px-2">Station Name</th>
+<th class="pb-3 px-2">Assigned</th>
+<th class="pb-3 px-2">Closed</th>
+<th class="pb-3 px-2">Efficiency</th>
+<th class="pb-3 px-2 text-right">Trend</th>
+</tr>
+</thead>
+<tbody class="text-sm font-medium text-slate-700">
+<tr class="border-b border-slate-50 hover:bg-slate-50/50">
+<td class="py-4 px-2">Trivandrum Central</td>
+<td class="py-4 px-2">1,204</td>
+<td class="py-4 px-2">1,150</td>
+<td class="py-4 px-2">
+<span class="px-2 py-1 bg-success/10 text-success text-[10px] font-bold rounded-full">95.5%</span>
+</td>
+<td class="py-4 px-2 text-right">
+<span class="material-symbols-outlined text-success">trending_up</span>
+</td>
+</tr>
+<tr class="border-b border-slate-50 hover:bg-slate-50/50">
+<td class="py-4 px-2">Kochi East</td>
+<td class="py-4 px-2">958</td>
+<td class="py-4 px-2">742</td>
+<td class="py-4 px-2">
+<span class="px-2 py-1 bg-accent/10 text-accent text-[10px] font-bold rounded-full">77.4%</span>
+</td>
+<td class="py-4 px-2 text-right">
+<span class="material-symbols-outlined text-slate-300">trending_flat</span>
+</td>
+</tr>
+<tr class="border-b border-slate-50 hover:bg-slate-50/50">
+<td class="py-4 px-2">Kozhikode North</td>
+<td class="py-4 px-2">822</td>
+<td class="py-4 px-2">510</td>
+<td class="py-4 px-2">
+<span class="px-2 py-1 bg-error/10 text-error text-[10px] font-bold rounded-full">62.0%</span>
+</td>
+<td class="py-4 px-2 text-right">
+<span class="material-symbols-outlined text-error">trending_down</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50">
+<td class="py-4 px-2">Thrissur West</td>
+<td class="py-4 px-2">645</td>
+<td class="py-4 px-2">590</td>
+<td class="py-4 px-2">
+<span class="px-2 py-1 bg-success/10 text-success text-[10px] font-bold rounded-full">91.4%</span>
+</td>
+<td class="py-4 px-2 text-right">
+<span class="material-symbols-outlined text-success">trending_up</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Mobile Nav Bottom -->
+<footer class="mt-auto p-6 text-center border-t border-slate-100 bg-white">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">© 2024 THOZHAN - Kerala Police Internal Administration Portal. All Data is Classified.</p>
+</footer>
+</main>
+<!-- Mobile Bottom Navigation (Shared Component Responsive Pivot) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-[0_-4px_10px_rgba(0,0,0,0.05)] flex justify-around items-center py-2 z-50">
+<button class="flex flex-col items-center gap-1 text-[#0B2A4A]/60">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#0B2A4A]/60">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px] font-bold">FIRs</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Reports</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#0B2A4A]/60">
+<span class="material-symbols-outlined">badge</span>
+<span class="text-[10px] font-bold">Staff</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#0B2A4A]/60">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+</body></html>
