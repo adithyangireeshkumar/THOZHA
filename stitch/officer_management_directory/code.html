@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>THOZHAN | Officer Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#241a06",
+                        "on-surface-variant": "#4c463d",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-container": "#bbd6ff",
+                        "secondary": "#466083",
+                        "primary-container": "#c3b091",
+                        "surface-container-low": "#f3f3f3",
+                        "on-primary-fixed-variant": "#52452c",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#f5e0bf",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#001c38",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "surface": "#f9f9f9",
+                        "tertiary-fixed-dim": "#91d78a",
+                        "outline": "#7e766b",
+                        "tertiary": "#2a6b2c",
+                        "secondary-fixed-dim": "#aec8f0",
+                        "on-background": "#1a1c1c",
+                        "surface-container": "#eeeeee",
+                        "background": "#f9f9f9",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-fixed": "#d3e4ff",
+                        "on-tertiary-container": "#085014",
+                        "on-secondary-container": "#435d80",
+                        "on-primary-container": "#50432b",
+                        "tertiary-container": "#7ec378",
+                        "surface-tint": "#6b5c42",
+                        "inverse-primary": "#d8c4a4",
+                        "surface-dim": "#dadada",
+                        "primary": "#6b5c42",
+                        "primary-fixed-dim": "#d8c4a4",
+                        "outline-variant": "#cfc5b9",
+                        "inverse-surface": "#2f3131",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-fixed-variant": "#2d486a",
+                        "on-tertiary-fixed-variant": "#0c5216",
+                        "on-tertiary-fixed": "#002203",
+                        "tertiary-fixed": "#acf4a4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cfc5b9;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased flex overflow-hidden h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-white dark:bg-slate-950 h-screen w-64 border-r-0 shadow-none z-50">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-8 h-8 object-contain" data-alt="Kerala Police Crest official emblem with lion capital and conch shell on a textured parchment background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL8xUySS4rdeSmwkEsT6RpL2K4LOJP6-lTuO7pB-ZdSOKHv6terfxUVEcawcUqS-MJDegYZCqFUf4gHwzYa5lgiRGTgPtEoEJFD7m9I-9NkesEarEjoWprJUnuSLc-IdXkjvqEQPzcg8WLTythGOjGIAsZ_nayoGcvoTuHzui6QhubMmySzq_NkCJg3sL88UrXToWGIkfs1Z-j8Znlcrmcg_YH1kpyLl3wi1sndlY9Zt45o-gXLBnrvTCjzDvQr6dqdRWZkF5taIYE"/>
+</div>
+<div>
+<h1 class="text-lg font-black text-[#466083] dark:text-[#c3b091] uppercase tracking-widest leading-none">THOZHAN</h1>
+<p class="text-[10px] text-slate-500 font-medium tracking-tight">Officer Management System</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1 font-['Inter'] text-sm font-medium">
+<a class="flex items-center gap-3 px-3 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 hover:translate-x-1 transition-all duration-200 rounded-xl group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active Tab: Officer Directory -->
+<a class="flex items-center gap-3 px-3 py-3 bg-[#c3b091]/10 text-[#466083] dark:text-[#c3b091] border-l-4 border-[#466083] hover:translate-x-1 transition-all duration-200 rounded-r-xl group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">badge</span>
+<span>Officer Directory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 hover:translate-x-1 transition-all duration-200 rounded-xl group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl">calendar_today</span>
+<span>Duty Roster</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 hover:translate-x-1 transition-all duration-200 rounded-xl group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl">description</span>
+<span>Case Ledger</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 hover:translate-x-1 transition-all duration-200 rounded-xl group active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl">analytics</span>
+<span>Reports</span>
+</a>
+</nav>
+<div class="px-4 mt-auto space-y-4">
+<button class="w-full bg-secondary text-on-secondary py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-lg">person_add</span>
+<span>Register New Officer</span>
+</button>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors rounded-lg text-xs" href="#">
+<span class="material-symbols-outlined text-lg">help_center</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-error hover:bg-error-container transition-colors rounded-lg text-xs" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 ml-64 flex flex-col h-full bg-surface overflow-hidden">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky z-40 bg-slate-50 dark:bg-slate-900 shadow-[0px_12px_32px_rgba(11,42,74,0.04)]">
+<div class="flex items-center justify-between px-6 h-16 w-full max-w-screen-2xl mx-auto font-['Inter'] antialiased">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">shield_person</span>
+<span class="text-secondary-container font-semibold text-sm bg-secondary/10 px-3 py-1 rounded-full">HQ_VANTAGE_SERVER_01</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined text-slate-500 hover:bg-[#f3f3f3] p-2 rounded-full cursor-pointer transition-colors">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-slate-500 hover:bg-[#f3f3f3] p-2 rounded-full cursor-pointer transition-colors">settings</span>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">DIG Alexander K.</p>
+<p class="text-[10px] text-slate-500">Chief Officer</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="Professional portrait of a senior police official in dress uniform, serious expression, high-end studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARoE0a1i8SqzHjQW7r0VjF-6Y07ZP4NqMdlKXItUanR_Cib2V-Mdke8cUnlpxxVv7Gvr2SVl3dDam_tXMonSyEe-KUGTLyyyC-Ml9GhXjJVQcZL5_yahlsi-bUz3hLFQVMYzO-k4D2DXAk02BnHQvji8u1eFFKRZ7NHU-T3kJdOixWw3zw-F1LeJQJ5LmwmlPq1dTKKRHFz1KQtvdI7yFssSXObgwfHAZ5MqGTF_M42BJHxflSZDWYY-KTmE5LVNe_fqjf9BdK98Kq"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<div class="max-w-6xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div class="flex items-start gap-4">
+<div class="h-14 w-1 bg-primary rounded-full mt-2"></div>
+<div>
+<h2 class="text-3xl font-black text-on-surface tracking-tight leading-none mb-2">Officer Directory</h2>
+<p class="text-on-surface-variant flex items-center gap-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-xs font-bold">1,248 TOTAL PERSONNEL</span>
+<span class="text-sm">Verified under State Registry</span>
+</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-primary-container text-on-primary-container px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-[#b8a280] transition-colors active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-lg">file_download</span>
+                            Export Registry
+                        </button>
+</div>
+</div>
+<!-- Filters Bento -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="md:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.02)] border-b-2 border-outline-variant/10">
+<label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Search Personnel</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 py-3 text-sm focus:ring-2 focus:ring-secondary transition-all" placeholder="Search by Name, ID or PEN Number..." type="text"/>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.02)] border-b-2 border-outline-variant/10">
+<label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Station / Unit</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg py-3 text-sm focus:ring-2 focus:ring-secondary cursor-pointer">
+<option>All Stations</option>
+<option>Thiruvananthapuram City</option>
+<option>Kochi Central</option>
+<option>Kozhikode Town</option>
+</select>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.02)] border-b-2 border-outline-variant/10">
+<label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Duty Status</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg py-3 text-sm focus:ring-2 focus:ring-secondary cursor-pointer">
+<option>All Statuses</option>
+<option>Active</option>
+<option>On Leave</option>
+<option>Off-duty</option>
+</select>
+</div>
+</div>
+<!-- Ledger Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] overflow-hidden relative">
+<!-- Subtle Watermark -->
+<div class="absolute bottom-4 right-4 opacity-[0.03] pointer-events-none select-none">
+<img class="w-32 h-32 grayscale brightness-0 invert" data-alt="Faint watermark of police seal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsgD0Wvj-gkwJsDSocRhicpLNpfd_E1pO_o6DIr60H6reLVt-6E27LXQeg3TRXkSncS95swURzvmx3NHbtFPExkIUvCpEMdEgRr1X6tYjsQ3tbWAOpU-7TMC6V0p7Xz1ZXZ3A3qtN1rAcExfFayk3eruPBXg5x9kqJg1S7bOkJkroDHlD3E4wYkroPM5_zOIqtUhbvheG6hXk9mv7gjY_skoDuQn6LkzB1Q0rFKOMDVaWNVhHwgQ7cOil9VOEfSgtzeOFuffAvY6fP"/>
+</div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-secondary-fixed">
+<th class="py-4 px-6 text-[11px] font-black text-on-secondary-fixed uppercase tracking-wider">Officer ID</th>
+<th class="py-4 px-6 text-[11px] font-black text-on-secondary-fixed uppercase tracking-wider">Name &amp; Rank</th>
+<th class="py-4 px-6 text-[11px] font-black text-on-secondary-fixed uppercase tracking-wider">Police Station</th>
+<th class="py-4 px-6 text-[11px] font-black text-on-secondary-fixed uppercase tracking-wider text-center">Duty Status</th>
+<th class="py-4 px-6 text-[11px] font-black text-on-secondary-fixed uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-5 px-6">
+<span class="font-mono text-xs font-bold text-on-surface-variant">PEN-82910</span>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of male police officer in formal dress" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJtJzNAWXlXkG6q0r9dQ4BYIRT-U5SvSv39obx6uGFdy71Z9ECaWMYXSW5d87z5gQjTZ5xvdkM8FiXLmoodQhRZCEmQMNTQtfU9NjtR_BPPhBe93kZAJlRfWAQeJJfwGviq3-MNXjywzWONKT8ju5b9qCB0Hx5-iE7Z9Ubvu-BM8Elb2KnhmGMujLbnojxlsolCpMezU9zgIBoqvjNlis2wMZopIUspu4JRlW-lVEpuQOAAH4JR2zoQa1b1rSJUKxuFgtjkKK1O8Rt"/>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface leading-tight">Suresh Raghavan</p>
+<p class="text-[11px] text-primary font-medium">Sub-Inspector (SI)</p>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<p class="text-sm text-on-surface-variant">Central Station, Kochi</p>
+</td>
+<td class="py-5 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full text-[11px] font-bold border border-tertiary/10">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg text-secondary transition-colors" title="Edit Profile">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-2 hover:bg-white rounded-lg text-secondary transition-colors" title="View Service Record">
+<span class="material-symbols-outlined text-lg">history_edu</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low transition-colors group">
+<td class="py-5 px-6">
+<span class="font-mono text-xs font-bold text-on-surface-variant">PEN-74552</span>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of female police officer in uniform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjZtwPKaY_WrkwMbW7b-P6OgNR4gFuhkIcOBf20WUmJ02woYMv6Sf_MCist-NkhYWzGIRUr0c7fLmiha7iaqBh2_oez6rCE6JRAvZHMopPtZ900gppkFBKxN1Cch9sJ1YLH9yxvHovOD9T6dLFm96gbdu5D3eZLW2OwX5y1h67Z8IBdjs-BVFqqr8mhHB8T4ZWYyvZ97z4YppeeJYTEbGR9jMLq-4AyZwCyuCYJWueCfu479NoGZdaxh8SD3P-idhW05NJJB8_FPZd"/>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface leading-tight">Meera Nair</p>
+<p class="text-[11px] text-primary font-medium">Circle Inspector (CI)</p>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<p class="text-sm text-on-surface-variant">Fort Station, TVM</p>
+</td>
+<td class="py-5 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 bg-error-container/20 text-error px-3 py-1 rounded-full text-[11px] font-bold border border-error/10">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                        Off-duty
+                                    </span>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg text-secondary transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-2 hover:bg-white rounded-lg text-secondary transition-colors">
+<span class="material-symbols-outlined text-lg">history_edu</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-5 px-6">
+<span class="font-mono text-xs font-bold text-on-surface-variant">PEN-90112</span>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Police officer headshot, professional appearance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB_ptu1LAY4zzG9RE2-EFI3ZpxWdpDWYUesMeSCEaLxjV0uo-NsZ5BR7-GO5EX__yg8nbRf_hF5p5OfZrdW-5NUcoShzuSxXuWfVryWCRb-wVdUMocZb0AxTW19yzdCQuAMMM79WnLS7_oDfW58oEEz0_zzjoum2e6WfHvGy_X1WlvNBZnzJSI9gXlWPZ0v3Z5ifN7TGA2smMdJCxzBljWDbjIUvgzPt5J25CFTSdKwiYSCCAivwXeSHF5mttjdlH1mdhPyna97eSZ"/>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface leading-tight">Biju Kumar</p>
+<p class="text-[11px] text-primary font-medium">Assistant SI (ASI)</p>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<p class="text-sm text-on-surface-variant">Palayam Station, Kozhikode</p>
+</td>
+<td class="py-5 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-[11px] font-bold border border-slate-200">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                        On Leave
+                                    </span>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg text-secondary transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-2 hover:bg-white rounded-lg text-secondary transition-colors">
+<span class="material-symbols-outlined text-lg">history_edu</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low transition-colors group">
+<td class="py-5 px-6">
+<span class="font-mono text-xs font-bold text-on-surface-variant">PEN-33421</span>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Police officer portrait, authoritative look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQt1yXLREnYZnTe4K1jNzAQbWyvABoJmUpQNXjFAd5PbwBZpWeFfMK5cVPMJ6xCG_Ojey5ECX8l5PxGG7u1AK2VS4NlP9KWuXZ6W8wLULyNODViQB3sQkndA3FRN1h33nMyrw8I7zf6I5aF8fFBVdhV2bEqKuByObD7jGm6-VeDQ17C4kzJb6FpMQUl6C98pVD6J5SujFQnvlG1cqbwlRGJSMhky7oIxfMT0HM_QSOb03dM2ytTg60HnBKkC0peJG19-Pes9GWfEd-"/>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface leading-tight">Anjali S.</p>
+<p class="text-[11px] text-primary font-medium">Civil Police Officer (CPO)</p>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<p class="text-sm text-on-surface-variant">Cyber Cell Unit, HQ</p>
+</td>
+<td class="py-5 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full text-[11px] font-bold border border-tertiary/10">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg text-secondary transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-2 hover:bg-white rounded-lg text-secondary transition-colors">
+<span class="material-symbols-outlined text-lg">history_edu</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-surface-container-low flex items-center justify-between">
+<p class="text-[10px] font-bold text-slate-500 uppercase">Showing 1-10 of 1,248 Results</p>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-white text-slate-400 cursor-not-allowed">
+<span class="material-symbols-outlined text-base">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-secondary text-on-secondary text-xs font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-white text-on-surface text-xs font-bold hover:bg-slate-200 transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-white text-on-surface text-xs font-bold hover:bg-slate-200 transition-colors">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-white text-slate-600 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Summary Footer Info -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-primary/5 rounded-xl p-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">how_to_reg</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase leading-none mb-1">On-Duty Fleet</p>
+<p class="text-xl font-black text-primary leading-none">942</p>
+</div>
+</div>
+<div class="bg-secondary/5 rounded-xl p-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">event_busy</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase leading-none mb-1">Leave Requests</p>
+<p class="text-xl font-black text-secondary leading-none">54</p>
+</div>
+</div>
+<div class="bg-tertiary/5 rounded-xl p-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase leading-none mb-1">Certified Units</p>
+<p class="text-xl font-black text-tertiary leading-none">100%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression: Not rendered on Directory as per guidelines -->
+</body></html>

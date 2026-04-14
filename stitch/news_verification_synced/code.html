@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>News Verification - THOZHAN Police Administration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#000080",
+                        khaki: "#C3B091",
+                        "on-khaki": "#1c1917"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Public Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans antialiased">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col h-screen w-64 border-r border-stone-300 shadow-lg bg-[#C3B091] dark:bg-stone-800 font-sans antialiased text-sm font-medium">
+<div class="p-6">
+<h1 class="text-2xl font-bold tracking-tighter text-[#000080] dark:text-blue-300">THOZHAN</h1>
+<p class="text-[10px] uppercase tracking-widest text-[#000080]/70 font-bold">Internal Portal</p>
+</div>
+<nav class="flex-1 mt-4 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-800 dark:text-stone-300 hover:bg-[#000080]/10 transition-colors rounded-lg mx-2 my-1" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-800 dark:text-stone-300 hover:bg-[#000080]/10 transition-colors rounded-lg mx-2 my-1" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                FIR Management
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-800 dark:text-stone-300 hover:bg-[#000080]/10 transition-colors rounded-lg mx-2 my-1" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+                Case Management
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-800 dark:text-stone-300 hover:bg-[#000080]/10 transition-colors rounded-lg mx-2 my-1" href="#">
+<span class="material-symbols-outlined" data-icon="event_repeat">event_repeat</span>
+                Follow-ups
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-800 dark:text-stone-300 hover:bg-[#000080]/10 transition-colors rounded-lg mx-2 my-1" href="#">
+<span class="material-symbols-outlined" data-icon="local_police">local_police</span>
+                Officers
+            </a>
+<!-- Active Navigation Item -->
+<a class="flex items-center gap-3 px-4 py-3 bg-[#000080] text-white rounded-lg mx-2 my-1 shadow-md" href="#">
+<span class="material-symbols-outlined" data-icon="fact_check" style="font-variation-settings: 'FILL' 1;">fact_check</span>
+                News Verification
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-800 dark:text-stone-300 hover:bg-[#000080]/10 transition-colors rounded-lg mx-2 my-1" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+                Reports
+            </a>
+</nav>
+<div class="mt-auto border-t border-stone-400/30 p-4">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-800 dark:text-stone-300 hover:bg-[#000080]/10 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-800 dark:text-stone-300 hover:bg-[#000080]/10 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="ml-64 flex justify-between items-center h-16 px-6 fixed top-0 right-0 left-0 bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800 shadow-sm z-10">
+<div class="flex items-center gap-4">
+<span class="text-[#000080] font-bold text-lg">News Verification</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<input class="w-80 pl-10 pr-4 py-2 bg-stone-100 border-transparent focus:bg-white focus:ring-2 focus:ring-[#000080] rounded-full text-sm transition-all" placeholder="Search articles or sources..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-stone-400 text-sm" data-icon="search">search</span>
+</div>
+<div class="flex items-center gap-4 text-stone-500">
+<button class="hover:text-[#000080] transition-all"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="hover:text-[#000080] transition-all"><span class="material-symbols-outlined" data-icon="help">help</span></button>
+<button class="hover:text-[#000080] transition-all"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 mt-16 p-8 min-h-screen">
+<header class="mb-8">
+<h2 class="text-3xl font-extrabold text-[#000080] tracking-tight">News Verification</h2>
+<p class="text-stone-600 mt-1">Review and verify public news articles for accuracy and public order.</p>
+</header>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+<p class="text-stone-500 text-sm font-semibold uppercase tracking-wider">Total Pending</p>
+<h3 class="text-3xl font-bold text-[#000080] mt-2">24</h3>
+</div>
+<div class="bg-red-50 p-6 rounded-xl border border-red-100 shadow-sm">
+<p class="text-red-600 text-sm font-semibold uppercase tracking-wider">High Risk</p>
+<h3 class="text-3xl font-bold text-red-700 mt-2">08</h3>
+</div>
+<div class="bg-amber-50 p-6 rounded-xl border border-amber-100 shadow-sm">
+<p class="text-amber-600 text-sm font-semibold uppercase tracking-wider">Verified Today</p>
+<h3 class="text-3xl font-bold text-amber-700 mt-2">142</h3>
+</div>
+<div class="bg-stone-900 p-6 rounded-xl shadow-lg">
+<p class="text-stone-400 text-sm font-semibold uppercase tracking-wider">Queue Priority</p>
+<h3 class="text-3xl font-bold text-white mt-2">Critical</h3>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex items-center justify-between mb-6 bg-white p-4 rounded-lg border border-stone-200">
+<div class="flex gap-4">
+<select class="border-stone-200 rounded-lg text-sm bg-stone-50 px-4 py-2 focus:ring-[#000080]">
+<option>All Sources</option>
+<option>Social Media</option>
+<option>Local News</option>
+<option>WhatsApp Reports</option>
+</select>
+<select class="border-stone-200 rounded-lg text-sm bg-stone-50 px-4 py-2 focus:ring-[#000080]">
+<option>Sort by: Newest First</option>
+<option>Sort by: Risk Level</option>
+</select>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 text-stone-600 hover:bg-stone-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                Advanced Filters
+            </button>
+</div>
+<!-- Pending Articles List -->
+<div class="space-y-4">
+<!-- Article Card 1 -->
+<div class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden flex transition-all hover:border-[#C3B091] group">
+<div class="w-48 h-auto overflow-hidden bg-stone-200 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Blurred social media post screenshot with viral red text overlays and emergency sirens graphic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZMA0owoPBjxTG8Jl9v8_4yj9ANI2ybfPKqlave8VEkMIs8epFvPWZPey9WaFJalNFBKFgYpcC0yyK6D7uLyoTYLL8ARkYC5gB0Bgo9ML75My4nQgR1h6xa_ClK-vxj0hj_jxEbKr4JPsETnty5cgXWzVBL3tUXhMoBZgR13TeXx2FR1l-1kVCV4WA1HJJPrid-P4oDiSDlRKUsE8JNRHGe4FfTBE787EkdHdGIKKDLKByi4mkSgcrUo1QKn8BLfrsGc8x4c-NUUqS"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<span class="absolute bottom-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">HIGH RISK</span>
+</div>
+<div class="flex-1 p-6 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-lg font-bold text-[#000080]">Alleged Unrest in Calicut Central Market Area</h4>
+<div class="flex items-center gap-3 text-stone-500 text-xs mt-1">
+<span class="flex items-center gap-1 font-medium"><span class="material-symbols-outlined text-[14px]" data-icon="source">source</span> WhatsApp Forward</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="calendar_today">calendar_today</span> Oct 24, 2023 • 14:20</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-[#000080] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                                Approve
+                            </button>
+<button class="border border-stone-300 text-stone-700 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-stone-50 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="cancel">cancel</span>
+                                Reject
+                            </button>
+</div>
+</div>
+<p class="text-stone-600 text-sm line-clamp-2 mt-2 leading-relaxed">
+                        Viral message claiming a massive road blockade and stone-pelting incident in Calicut Market area. Attached video shows old footage from a different state. Multiple shares detected across 15 local groups within 30 minutes.
+                    </p>
+<div class="mt-auto pt-4 flex gap-3">
+<span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-[11px] font-bold uppercase">Public Order</span>
+<span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-[11px] font-bold uppercase">Social Media Control</span>
+</div>
+</div>
+</div>
+<!-- Article Card 2 -->
+<div class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden flex transition-all hover:border-[#C3B091] group">
+<div class="w-48 h-auto overflow-hidden bg-stone-200 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a generic local newspaper headline about government policy with blurred background office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCqPoG9wmO4pQqZagddj16cG5817AFZ4L_GI9cyjxRRFUTGPYTTuD2i5BtsHFnRHODaVHwud9e64bEOYxKbunwMIMvWB94PJPIJKme95i_UgIcErFNUbM_eqD6de7-XEvKTncPjgdG93nuSaDPROEA1Y7dCauCKclKqEI5JzZvUifxndITXZQb6IEZC8dQT_R3qViWM4IDRO5qKM9IUOQFgU0OPRKnNisv2W7liJdt-SqaAq8YkVCOb0wA3bes16-fsA80q3RT5vXm"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<span class="absolute bottom-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">MEDIUM RISK</span>
+</div>
+<div class="flex-1 p-6 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-lg font-bold text-[#000080]">New Traffic Regulations for NH-66 Junction</h4>
+<div class="flex items-center gap-3 text-stone-500 text-xs mt-1">
+<span class="flex items-center gap-1 font-medium"><span class="material-symbols-outlined text-[14px]" data-icon="newspaper">newspaper</span> Local Journal</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="calendar_today">calendar_today</span> Oct 24, 2023 • 11:45</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-[#000080] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                                Approve
+                            </button>
+<button class="border border-stone-300 text-stone-700 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-stone-50 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="cancel">cancel</span>
+                                Reject
+                            </button>
+</div>
+</div>
+<p class="text-stone-600 text-sm line-clamp-2 mt-2 leading-relaxed">
+                        Article misquotes the RTO regarding fine amounts for helmet violations at the new bypass junction. Needs correction before wider circulation as it is causing confusion among commuters.
+                    </p>
+<div class="mt-auto pt-4 flex gap-3">
+<span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-[11px] font-bold uppercase">Regulatory</span>
+<span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-[11px] font-bold uppercase">Traffic</span>
+</div>
+</div>
+</div>
+<!-- Article Card 3 -->
+<div class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden flex transition-all hover:border-[#C3B091] group">
+<div class="w-48 h-auto overflow-hidden bg-stone-200 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Digital illustration of medical stethoscope over a phone screen showing health alert graphics with blue soft glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPBbAFhrHr2QuVFhMA3QAYD95qmZorRSEMfJX0WWDtHbmoh0OVn6i1FnhraerQqUa-Rwp_Ga8qW008WCxMEzFLbl3sRAu61FtfBE7QbZduRXDcQCxdL-GsxjdqX5JO1vomAvMaXXYOx7weMSHssuSvuIQ3kefVNINMoV24cXBNWTxTBDpsntrGRbFdpU0KM49hKzREs_4prkNOwfB6-Dckn6PHlActFw2QHbe8hmLpeHGZjICT9wtTc7Jk5EyzSa2XbJBNd8qj9Udn"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<span class="absolute bottom-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">LOW RISK</span>
+</div>
+<div class="flex-1 p-6 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h4 class="text-lg font-bold text-[#000080]">Awareness Drive: Monsoon Health Safety</h4>
+<div class="flex items-center gap-3 text-stone-500 text-xs mt-1">
+<span class="flex items-center gap-1 font-medium"><span class="material-symbols-outlined text-[14px]" data-icon="facebook">social_leaderboard</span> Social Community Feed</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="calendar_today">calendar_today</span> Oct 23, 2023 • 18:30</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-[#000080] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                                Approve
+                            </button>
+<button class="border border-stone-300 text-stone-700 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-stone-50 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="cancel">cancel</span>
+                                Reject
+                            </button>
+</div>
+</div>
+<p class="text-stone-600 text-sm line-clamp-2 mt-2 leading-relaxed">
+                        Public health advisory post from a verified NGO regarding leptospirosis prevention. Accurate information, aligns with government health department guidelines.
+                    </p>
+<div class="mt-auto pt-4 flex gap-3">
+<span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-[11px] font-bold uppercase">Health</span>
+<span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-[11px] font-bold uppercase">Education</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-10 flex items-center justify-between border-t border-stone-200 pt-6">
+<p class="text-sm text-stone-500">Showing <span class="font-bold text-stone-900">1-3</span> of <span class="font-bold text-stone-900">24</span> articles</p>
+<div class="flex gap-2">
+<button class="p-2 border border-stone-300 rounded-lg hover:bg-stone-50 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-4 py-2 bg-[#000080] text-white rounded-lg text-sm font-bold">1</button>
+<button class="px-4 py-2 hover:bg-stone-100 rounded-lg text-sm font-bold transition-colors">2</button>
+<button class="px-4 py-2 hover:bg-stone-100 rounded-lg text-sm font-bold transition-colors">3</button>
+<button class="p-2 border border-stone-300 rounded-lg hover:bg-stone-50 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Emergency Floating FAB -->
+<button class="fixed bottom-8 right-8 bg-red-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center group">
+<span class="material-symbols-outlined text-2xl" data-icon="emergency_share" style="font-variation-settings: 'FILL' 1;">emergency_share</span>
+<span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs group-hover:ml-3 transition-all duration-300 font-bold uppercase text-xs tracking-widest">Emergency Alert</span>
+</button>
+</body></html>
