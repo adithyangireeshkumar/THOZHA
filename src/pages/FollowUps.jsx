@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   History, 
@@ -13,13 +13,49 @@ import {
   Search
 } from 'lucide-react';
 import { useDatabase } from '../context/DatabaseContext';
+import { supabase } from '../lib/supabase';
 
 const FollowUps = () => {
-  const { followups, cases, loading } = useDatabase();
+  const { followups, cases, loading, refreshData } = useDatabase();
+  const [formData, setFormData] = useState({
+    case_id: '',
+    followup_date: new Date().toISOString().split('T')[0],
+    status: 'investigation_started',
+    remarks: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  if (loading) return <div className="flex h-64 items-center justify-center">Loading Procedural Log...</div>;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.case_id) return alert('Please select a Case ID');
+    
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase
+        .from('case_followups')
+        .insert([formData]);
+      
+      if (error) throw error;
+      
+      alert('Case log updated successfully.');
+      setFormData({
+        case_id: '',
+        followup_date: new Date().toISOString().split('T')[0],
+        status: 'investigation_started',
+        remarks: ''
+      });
+      refreshData();
+    } catch (err) {
+      console.error('Follow-up error:', err);
+      alert('Failed to update log: ' + err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-  const displayFollowups = followups.slice(0, 5);
+  if (loading) return <div className="flex h-64 items-center justify-center text-secondary font-bold">Loading Procedural Log...</div>;
+
+  const displayFollowups = followups.slice(0, 10);
 
   return (
     <div className="space-y-8">
@@ -69,14 +105,14 @@ const FollowUps = () => {
                 {displayFollowups.map((fu, idx) => (
                   <tr key={fu.followup_id} className="hover:bg-surface-container-low/40 transition-colors group">
                     <td className="px-6 py-4 text-on-surface-variant whitespace-nowrap">{fu.followup_date}</td>
-                    <td className="px-6 py-4 font-bold text-secondary whitespace-nowrap uppercase">{fu.case_id.replace('case-', 'CAS-')}</td>
+                    <td className="px-6 py-4 font-bold text-secondary whitespace-nowrap uppercase">{fu.case_id?.toString().replace('case-', 'CAS-')}</td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
                         fu.status === 'case_closed' ? 'bg-surface-container-highest text-on-surface-variant' :
                         fu.status === 'investigation_started' ? 'bg-blue-100 text-blue-800' :
                         'bg-amber-100 text-amber-800'
                       }`}>
-                        {fu.status.replace('_', ' ')}
+                        {fu.status?.replace(/_/g, ' ')}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-on-surface-variant max-w-[200px] truncate">{fu.remarks}</td>
@@ -101,39 +137,65 @@ const FollowUps = () => {
                 Add New Follow-up Update
               </h2>
             </div>
-            <form className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
                 <label className="block text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest mb-1.5">Case ID</label>
-                <select className="w-full bg-surface-container-low border-none rounded-xl text-sm focus:ring-1 focus:ring-secondary py-2 px-3 outline-none">
-                  <option>Select Active Case...</option>
-                  {cases.slice(0, 10).map(c => (
-                    <option key={c.case_id} value={c.case_id}>{c.case_id.toUpperCase()}</option>
+                <select 
+                  className="w-full bg-surface-container-low border-none rounded-xl text-sm focus:ring-1 focus:ring-secondary py-2 px-3 outline-none"
+                  value={formData.case_id}
+                  onChange={(e) => setFormData({...formData, case_id: e.target.value})}
+                  required
+                >
+                  <option value="">Select Active Case...</option>
+                  {cases.slice(0, 20).map(c => (
+                    <option key={c.case_id} value={c.case_id}>{c.case_id?.toString().toUpperCase().replace('CASE-', 'CAS-')}</option>
                   ))}
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest mb-1.5">Date</label>
-                  <input className="w-full bg-surface-container-low border-none rounded-xl text-sm focus:ring-1 focus:ring-secondary py-2 px-3 outline-none" type="date" />
+                  <input 
+                    className="w-full bg-surface-container-low border-none rounded-xl text-sm focus:ring-1 focus:ring-secondary py-2 px-3 outline-none" 
+                    type="date"
+                    value={formData.followup_date}
+                    onChange={(e) => setFormData({...formData, followup_date: e.target.value})}
+                  />
                 </div>
                 <div>
                   <label className="block text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest mb-1.5">Status</label>
-                  <select className="w-full bg-surface-container-low border-none rounded-xl text-sm focus:ring-1 focus:ring-secondary py-2 px-3 outline-none">
-                    <option>Investigation</option>
-                    <option>Court Hearing</option>
-                    <option>Evidence Logged</option>
-                    <option>Arrest Made</option>
+                  <select 
+                    className="w-full bg-surface-container-low border-none rounded-xl text-sm focus:ring-1 focus:ring-secondary py-2 px-3 outline-none"
+                    value={formData.status}
+                    onChange={(e) => setFormData({...formData, status: e.target.value})}
+                  >
+                    <option value="investigation_started">Investigation</option>
+                    <option value="evidence_collected">Evidence Logged</option>
+                    <option value="arrest_made">Arrest Made</option>
+                    <option value="chargesheet_filed">Court Hearing</option>
+                    <option value="case_closed">Case Closed</option>
                   </select>
                 </div>
               </div>
               <div>
                 <label className="block text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest mb-1.5">Remarks</label>
-                <textarea className="w-full bg-surface-container-low border-none rounded-xl text-sm focus:ring-1 focus:ring-secondary py-2 px-3 outline-none resize-none" placeholder="Enter session updates..." rows="3"></textarea>
+                <textarea 
+                  className="w-full bg-surface-container-low border-none rounded-xl text-sm focus:ring-1 focus:ring-secondary py-2 px-3 outline-none resize-none" 
+                  placeholder="Enter session updates..." 
+                  rows="3"
+                  value={formData.remarks}
+                  onChange={(e) => setFormData({...formData, remarks: e.target.value})}
+                  required
+                ></textarea>
               </div>
               <div className="pt-2">
-                <button className="w-full bg-secondary text-on-secondary py-3 rounded-xl font-bold hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95" type="submit">
+                <button 
+                  className="w-full bg-secondary text-on-secondary py-3 rounded-xl font-bold hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95 disabled:opacity-70" 
+                  type="submit"
+                  disabled={isSubmitting}
+                >
                   <Save className="w-4 h-4" />
-                  Update Case Log
+                  {isSubmitting ? 'Syncing...' : 'Update Case Log'}
                 </button>
               </div>
             </form>

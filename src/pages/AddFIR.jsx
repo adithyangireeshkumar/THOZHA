@@ -15,20 +15,60 @@ import {
   CheckCircle2,
   AlertTriangle
 } from 'lucide-react';
-import { demoStations } from '../lib/demoData';
+import { useDatabase } from '../context/DatabaseContext';
+import { supabase } from '../lib/supabase';
 
 const AddFIR = () => {
   const navigate = useNavigate();
+  const { stations, officers, refreshData } = useDatabase();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    fir_number: `FIR-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`,
+    fir_date: new Date().toISOString().split('T')[0],
+    fir_time: new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' }),
+    crime_type: '',
+    ipc_section: '',
+    station_id: '',
+    location: '',
+    description: '',
+    complainant: 'Admin Registry'
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate submission
-    setTimeout(() => {
-      setLoading(false);
+    
+    try {
+      // 1. Insert FIR
+      const { data: firData, error: firError } = await supabase
+        .from('fir')
+        .insert([formData])
+        .select();
+
+      if (firError) throw firError;
+
+      // 2. Automatically create a case for this FIR
+      const { error: caseError } = await supabase
+        .from('cases')
+        .insert([{
+          fir_id: firData[0].fir_id,
+          officer_id: officers[0]?.officer_id, // Default to first officer for now
+          case_status: 'complaint_registered',
+          start_date: formData.fir_date
+        }]);
+
+      if (caseError) throw caseError;
+
+      alert('FIR Registered successfully in Sovereignty Ledger');
+      await refreshData();
       navigate('/firs');
-    }, 1500);
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert(`System Error: ${error.message}. Ensure you have write permissions.`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -50,7 +90,7 @@ const AddFIR = () => {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-surface-container-lowest shadow-[0px_12px_32px_rgba(11,42,74,0.04)] rounded-xl relative overflow-hidden p-10 kasavu-pattern"
+        className="bg-surface-container-lowest shadow-[0px_12px_32px_rgba(11,42,74,0.04)] rounded-xl relative overflow-hidden p-10"
       >
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center space-x-2 text-primary font-semibold">
@@ -67,7 +107,7 @@ const AddFIR = () => {
           <div className="md:col-span-2">
             <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">FIR Number</label>
             <div className="bg-surface-container-high px-4 py-3 rounded-lg border-b-2 border-outline-variant/20 flex justify-between items-center">
-              <span className="font-mono font-bold text-secondary tracking-widest uppercase">FIR-{new Date().getFullYear()}-{Math.floor(Math.random() * 10000).toString().padStart(5, '0')}</span>
+              <span className="font-mono font-bold text-secondary tracking-widest uppercase">{formData.fir_number}</span>
               <span className="text-[10px] font-bold text-on-surface-variant bg-surface-container-highest px-2 py-1 rounded">AUTO-GENERATED</span>
             </div>
           </div>
@@ -75,7 +115,13 @@ const AddFIR = () => {
           <div>
             <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Date of Occurrence *</label>
             <div className="relative">
-              <input required className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium" type="date"/>
+              <input 
+                required 
+                className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium" 
+                type="date"
+                value={formData.fir_date}
+                onChange={(e) => setFormData({...formData, fir_date: e.target.value})}
+              />
               <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 w-4 h-4 pointer-events-none" />
             </div>
           </div>
@@ -83,35 +129,55 @@ const AddFIR = () => {
           <div>
             <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Time of Occurrence *</label>
             <div className="relative">
-              <input required className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium" type="time"/>
+              <input 
+                required 
+                className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium" 
+                type="time"
+                value={formData.fir_time}
+                onChange={(e) => setFormData({...formData, fir_time: e.target.value})}
+              />
               <ClockIcon className="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 w-4 h-4 pointer-events-none" />
             </div>
           </div>
 
           <div>
             <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Crime Type *</label>
-            <select required className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium appearance-none">
+            <select 
+              required 
+              className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium appearance-none"
+              value={formData.crime_type}
+              onChange={(e) => setFormData({...formData, crime_type: e.target.value})}
+            >
               <option value="">Select Crime Category</option>
-              <option value="theft">Theft</option>
-              <option value="robbery">Robbery</option>
-              <option value="assault">Assault</option>
-              <option value="burglary">Burglary</option>
-              <option value="fraud">Fraud</option>
-              <option value="cybercrime">Cyber Crime</option>
-              <option value="other">Other</option>
+              {['theft', 'robbery', 'assault', 'burglary', 'fraud', 'cybercrime', 'drug_offense', 'murder', 'kidnapping', 'domestic_violence', 'other'].map(t => (
+                <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1).replace('_', ' ')}</option>
+              ))}
             </select>
           </div>
 
           <div>
             <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">IPC Section *</label>
-            <input required className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30" placeholder="e.g. Section 379" type="text"/>
+            <input 
+              required 
+              className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30" 
+              placeholder="e.g. Section 379" 
+              type="text"
+              value={formData.ipc_section}
+              onChange={(e) => setFormData({...formData, ipc_section: e.target.value})}
+            />
           </div>
 
           <div>
             <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Police Station Jurisdiction</label>
             <div className="relative">
-              <select className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium appearance-none">
-                {demoStations.map(station => (
+              <select 
+                className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium appearance-none"
+                value={formData.station_id}
+                onChange={(e) => setFormData({...formData, station_id: e.target.value})}
+                required
+              >
+                <option value="">Select Station</option>
+                {stations?.map(station => (
                   <option key={station.station_id} value={station.station_id}>{station.station_name}</option>
                 ))}
               </select>
@@ -122,14 +188,28 @@ const AddFIR = () => {
           <div>
             <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Location of Incident *</label>
             <div className="relative">
-              <input required className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30" placeholder="Enter landmark or street" type="text"/>
+              <input 
+                required 
+                className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-3 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30" 
+                placeholder="Enter landmark or street" 
+                type="text"
+                value={formData.location}
+                onChange={(e) => setFormData({...formData, location: e.target.value})}
+              />
               <MapPin className="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 w-4 h-4 pointer-events-none" />
             </div>
           </div>
 
           <div className="md:col-span-2">
             <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Incident Narrative & Description *</label>
-            <textarea required className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-4 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30 resize-none" placeholder="Provide a detailed account of the reported incident..." rows="6"></textarea>
+            <textarea 
+              required 
+              className="w-full bg-surface-container-high border-none border-b-2 border-outline-variant/20 py-4 px-4 focus:border-secondary focus:ring-0 transition-all text-on-surface font-medium placeholder:text-on-surface-variant/30 resize-none" 
+              placeholder="Provide a detailed account of the reported incident..." 
+              rows="6"
+              value={formData.description}
+              onChange={(e) => setFormData({...formData, description: e.target.value})}
+            ></textarea>
           </div>
 
           <div className="md:col-span-2 flex items-center justify-between pt-8 border-t border-outline-variant/10">

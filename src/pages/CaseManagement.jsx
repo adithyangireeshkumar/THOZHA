@@ -23,14 +23,25 @@ const CaseManagement = () => {
 
   if (loading) return <div className="flex h-64 items-center justify-center">Loading Investigation Log...</div>;
 
+  const [searchTerm, setSearchTerm] = React.useState('');
+
+  const filteredCases = React.useMemo(() => {
+    return cases.filter(c => {
+      const fir = firs.find(f => f.fir_id === c.fir_id);
+      const officer = officers.find(o => o.officer_id === c.officer_id);
+      const searchStr = `${c.case_id} ${fir?.fir_number || ''} ${officer?.officer_name || ''} ${c.case_status}`.toLowerCase();
+      return searchStr.includes(searchTerm.toLowerCase());
+    });
+  }, [cases, firs, officers, searchTerm]);
+
   const stats = [
     { title: 'Active Investigations', value: cases.filter(c => c.case_status !== 'case_closed').length, icon: FolderOpen, color: 'text-secondary', trend: '+12% from last month' },
     { title: 'Pending Approval', value: cases.filter(c => c.case_status === 'complaint_registered').length, icon: AlertTriangle, color: 'text-primary' },
-    { title: 'Cold Cases', value: '09', icon: AlertTriangle, color: 'text-error', sub: 'Requires Review' },
-    { title: 'Closure Rate', value: `${Math.round((cases.filter(c => c.case_status === 'case_closed').length / cases.length) * 100)}%`, icon: CheckSquare, color: 'text-tertiary', progress: 84 },
+    { title: 'Closed Cases', value: cases.filter(c => c.case_status === 'case_closed').length, icon: CheckSquare, color: 'text-tertiary', progress: Math.round((cases.filter(c => c.case_status === 'case_closed').length / cases.length) * 100) || 0 },
+    { title: 'Total Ledger', value: cases.length, icon: Shield, color: 'text-secondary', sub: 'Last sync: Just now' },
   ];
 
-  const enrichedCases = cases.slice(0, 5).map(c => {
+  const enrichedCases = filteredCases.slice(0, 8).map(c => {
     const fir = firs.find(f => f.fir_id === c.fir_id);
     const officer = officers.find(o => o.officer_id === c.officer_id);
     return { ...c, fir, officer };
@@ -64,14 +75,20 @@ const CaseManagement = () => {
               </div>
             )}
             {stat.sub && (
-              <div className="mt-4 flex items-center text-error text-xs font-bold">
-                <AlertTriangle className="w-4 h-4 mr-1" />
+              <div className="mt-4 flex items-center text-on-surface-variant text-xs font-bold">
+                <Shield className="w-4 h-4 mr-1" />
                 {stat.sub}
               </div>
             )}
-            {stat.progress && (
-              <div className="w-full bg-surface-container-low h-1.5 rounded-full mt-4 overflow-hidden">
-                <div className="bg-tertiary h-full" style={{ width: `${stat.progress}%` }}></div>
+            {stat.progress !== undefined && (
+              <div className="mt-4">
+                <div className="flex justify-between text-[10px] font-bold uppercase mb-1">
+                  <span>Efficiency</span>
+                  <span>{stat.progress}%</span>
+                </div>
+                <div className="w-full bg-surface-container-low h-1.5 rounded-full overflow-hidden">
+                  <div className="bg-tertiary h-full transition-all duration-500" style={{ width: `${stat.progress}%` }}></div>
+                </div>
               </div>
             )}
             <div className="absolute -right-4 -bottom-4 opacity-5">
@@ -82,17 +99,27 @@ const CaseManagement = () => {
       </section>
 
       <section className="bg-surface-container-lowest rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] overflow-hidden">
-        <div className="p-6 border-b border-outline-variant/15 flex items-center justify-between bg-surface-container-low/30">
+        <div className="p-6 border-b border-outline-variant/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-container-low/30">
           <div>
             <h4 className="text-lg font-bold text-on-secondary-fixed tracking-tight">Case Records Ledger</h4>
             <p className="text-sm text-on-surface-variant">Centralized investigation tracking system</p>
           </div>
           <div className="flex gap-3">
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
+              <input 
+                type="text" 
+                placeholder="Search Cases..." 
+                className="pl-10 pr-4 py-2 bg-white border border-outline-variant/20 rounded-xl text-sm focus:ring-2 focus:ring-secondary/20 outline-none w-64 shadow-sm"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
             <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-container text-on-primary-container text-xs font-bold hover:brightness-95 transition-all">
               <Filter className="w-4 h-4" />
               Filter
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary text-on-secondary text-xs font-bold hover:bg-on-secondary-container transition-all shadow-lg active:scale-95">
+            <button onClick={() => navigate('/firs/add')} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary text-on-secondary text-xs font-bold hover:bg-on-secondary-container transition-all shadow-lg active:scale-95">
               <Plus className="w-4 h-4" />
               New Case
             </button>
@@ -114,7 +141,7 @@ const CaseManagement = () => {
             <tbody className="divide-y divide-surface-container-low">
               {enrichedCases.map((c, idx) => (
                 <tr key={c.case_id} className={`hover:bg-surface-container-low/50 transition-colors ${idx % 2 !== 0 ? 'bg-surface-container-low/30' : ''}`}>
-                  <td className="px-6 py-4 font-mono text-sm text-secondary font-bold uppercase">{c.case_id.replace('case-', 'CAS-2024-')}</td>
+                  <td className="px-6 py-4 font-mono text-sm text-secondary font-bold uppercase">{c.case_id.replace('case-', 'CAS-')}</td>
                   <td className="px-6 py-4 text-sm font-medium">{c.fir?.fir_number || 'N/A'}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
@@ -123,6 +150,7 @@ const CaseManagement = () => {
                           className="w-full h-full object-cover" 
                           src={`https://i.pravatar.cc/150?u=${c.officer_id}`} 
                           alt={c.officer?.officer_name}
+                          onError={(e) => { e.target.src = "https://i.pravatar.cc/150?u=fallback" }}
                         />
                       </div>
                       <span className="text-sm font-medium">{c.officer?.officer_name || 'Unassigned'}</span>
@@ -134,7 +162,7 @@ const CaseManagement = () => {
                       c.case_status === 'complaint_registered' ? 'bg-error-container text-on-error-container' :
                       'bg-tertiary-container text-on-tertiary-container'
                     }`}>
-                      {c.case_status.replace('_', ' ')}
+                      {c.case_status.replace(/_/g, ' ')}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm text-on-surface-variant">{c.start_date}</td>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDatabase } from '../context/DatabaseContext';
 import { motion } from 'framer-motion';
 import { 
   BarChart3, 
@@ -13,7 +14,8 @@ import {
   Monitor,
   LayoutDashboard,
   ArrowUpRight,
-  TrendingDown
+  TrendingDown,
+  RefreshCw
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -27,6 +29,7 @@ import {
   Pie,
   Cell
 } from 'recharts';
+import { supabase } from '../lib/supabase';
 
 const data = [
   { name: 'Jan', current: 4000, previous: 2400 },
@@ -37,13 +40,54 @@ const data = [
   { name: 'Jun', current: 2390, previous: 3800 },
 ];
 
-const pieData = [
-  { name: 'Resolved', value: 73, color: '#1B5E20' },
-  { name: 'Ongoing', value: 15, color: '#C62828' },
-  { name: 'Cold Case', value: 12, color: '#C3B091' },
-];
-
 const Reports = () => {
+  const { cases, firs, stations, news, loading } = useDatabase();
+
+  if (loading) return <div className="flex h-64 items-center justify-center text-secondary font-bold">Loading Analytics...</div>;
+
+  const totalCases = cases.length;
+  const resolvedCases = cases.filter(c => c.case_status === 'case_closed').length;
+  const pendingCases = cases.filter(c => c.case_status !== 'case_closed').length;
+  const newsVerified = news.filter(n => n.verified).length;
+
+  const resolutionRate = Math.round((resolvedCases / totalCases) * 100) || 0;
+
+  // Real data for charts
+  const pieData = [
+    { name: 'Resolved', value: resolvedCases, color: '#1B5E20' },
+    { name: 'Ongoing', value: pendingCases, color: '#C62828' },
+    { name: 'Cold Case', value: 0, color: '#C3B091' },
+  ];
+
+  // Dynamic Crime Categorization
+  const crimeStats = firs.reduce((acc, fir) => {
+    const type = fir.crime_type?.replace(/_/g, ' ').split(' ')
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') || 'Other';
+    acc[type] = (acc[type] || 0) + 1;
+    return acc;
+  }, {});
+
+  const crimeCategorization = Object.entries(crimeStats)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([label, value]) => ({ label, value, total: firs.length }));
+
+  // Dynamic Station Performance
+  const stationPerformance = stations.slice(0, 5).map(station => {
+    const stationFirs = firs.filter(f => f.station_id === station.station_id);
+    const stationCases = cases.filter(c => stationFirs.some(f => f.fir_id === c.fir_id));
+    const closed = stationCases.filter(c => c.case_status === 'case_closed').length;
+    const efficiency = Math.round((closed / stationCases.length) * 100) || 0;
+    
+    return {
+      name: station.station_name,
+      assigned: stationCases.length,
+      closed: closed,
+      eff: `${efficiency}%`,
+      trend: efficiency > 70 ? 'up' : 'down'
+    };
+  });
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -64,10 +108,10 @@ const Reports = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatsCard icon={<FileText className="w-5 h-5" />} label="Total Cases" value="12,482" trend="+4.2%" color="border-primary" />
-        <StatsCard icon={<CheckCircle className="w-5 h-5" />} label="Resolved" value="9,105" trend="73% Rate" color="border-tertiary" />
-        <StatsCard icon={<AlertCircle className="w-5 h-5" />} label="Pending" value="3,377" trend="128 Urgent" color="border-error" />
-        <StatsCard icon={<Verified className="w-5 h-5" />} label="News Verified" value="856" trend="98% Score" color="border-primary-container" />
+        <StatsCard icon={<FileText className="w-5 h-5" />} label="Total Cases" value={totalCases.toLocaleString()} trend="+4.2%" color="border-primary" />
+        <StatsCard icon={<CheckCircle className="w-5 h-5" />} label="Resolved" value={resolvedCases.toLocaleString()} trend={`${resolutionRate}% Rate`} color="border-tertiary" />
+        <StatsCard icon={<AlertCircle className="w-5 h-5" />} label="Pending" value={pendingCases.toLocaleString()} trend={`${pendingCases} Active`} color="border-error" />
+        <StatsCard icon={<Verified className="w-5 h-5" />} label="News Verified" value={newsVerified.toLocaleString()} trend="High Score" color="border-primary-container" />
       </div>
 
       <div className="grid grid-cols-12 gap-6">
@@ -128,7 +172,7 @@ const Reports = () => {
                     <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }}></span> 
                     {item.name}
                   </span>
-                  <span className="text-on-surface-variant">{item.value}%</span>
+                  <span className="text-on-surface-variant">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -143,13 +187,7 @@ const Reports = () => {
             Crime Categorization
           </h3>
           <div className="space-y-6">
-            {[
-              { label: 'Cyber Fraud', value: 2410, total: 3000 },
-              { label: 'Theft & Larceny', value: 1825, total: 3000 },
-              { label: 'Physical Assault', value: 942, total: 3000 },
-              { label: 'Narcotics', value: 615, total: 3000 },
-              { label: 'Others', value: 312, total: 3000 }
-            ].map(crime => (
+            {crimeCategorization.map(crime => (
               <div key={crime.label} className="space-y-1">
                 <div className="flex justify-between text-xs font-bold text-on-surface-variant">
                   <span>{crime.label}</span>
@@ -187,12 +225,7 @@ const Reports = () => {
                 </tr>
               </thead>
               <tbody className="text-sm font-medium text-on-surface">
-                {[
-                  { name: 'Trivandrum Central', assigned: '1,204', closed: '1,150', eff: '95.5%', trend: 'up' },
-                  { name: 'Kochi East', assigned: '958', closed: '742', eff: '77.4%', trend: 'flat' },
-                  { name: 'Kozhikode North', assigned: '822', closed: '510', eff: '62.0%', trend: 'down' },
-                  { name: 'Thrissur West', assigned: '645', closed: '590', eff: '91.4%', trend: 'up' }
-                ].map((station, i) => (
+                {stationPerformance.map((station, i) => (
                   <tr key={i} className="border-b border-outline-variant/5 hover:bg-surface-container-low/20 transition-colors">
                     <td className="py-4 px-2">{station.name}</td>
                     <td className="py-4 px-2">{station.assigned}</td>

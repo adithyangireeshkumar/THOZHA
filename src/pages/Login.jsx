@@ -40,11 +40,7 @@ const Login = () => {
       >
         <div className="flex flex-col items-center mb-10">
           <div className="w-16 h-16 mb-4 flex items-center justify-center bg-white rounded-full shadow-[0px_12px_32px_rgba(11,42,74,0.06)] p-2">
-            <img 
-              alt="Logo" 
-              className="w-full h-full object-contain" 
-              src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Kerala_Police_Seal.svg/1200px-Kerala_Police_Seal.svg.png" 
-            />
+            <ShieldCheck className="w-10 h-10 text-secondary" />
           </div>
           <h1 className="text-3xl font-black tracking-tighter text-secondary uppercase">THOZHAN</h1>
           <p className="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] font-bold mt-1">Keralam — God's Own Police</p>

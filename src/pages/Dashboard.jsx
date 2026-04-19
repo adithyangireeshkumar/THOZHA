@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import { useDatabase } from '../context/DatabaseContext';
+import { motion } from 'framer-motion';
 import { 
   FolderOpen, 
   AlertCircle, 
@@ -8,12 +8,16 @@ import {
   TrendingUp,
   Clock,
   FileText,
-  ShieldCheck
+  ShieldCheck,
+  Plus,
+  RefreshCw,
+  LayoutDashboard
 } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, AreaChart, Area
 } from 'recharts';
+import { supabase } from '../lib/supabase';
 
 const data = [
   { name: 'Aug 01', firs: 12, cases: 10 },
@@ -29,7 +33,7 @@ const StatsCard = ({ title, value, icon: Icon, trend, color, bgColor }) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    className={`bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] relative overflow-hidden group ${bgColor}`}
+    className={`bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] relative overflow-hidden group ${bgColor || ''}`}
   >
     <div className={`absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity ${color}`}>
       <Icon className="w-24 h-24" />
@@ -49,46 +53,70 @@ const StatsCard = ({ title, value, icon: Icon, trend, color, bgColor }) => (
 );
 
 const Dashboard = () => {
-  const { cases, loading } = useDatabase();
+  const { cases, firs, loading: dbLoading, refreshData } = useDatabase();
+  const [syncing, setSyncing] = useState(false);
   
-  if (loading) return <div className="flex h-64 items-center justify-center">Loading Sync...</div>;
+  if (dbLoading && firs.length === 0) return <div className="flex h-64 items-center justify-center text-secondary font-bold">Loading Sovereign Data...</div>;
 
   const activeCasesCount = cases.filter(c => c.case_status !== 'case_closed').length;
   const closedCasesCount = cases.filter(c => c.case_status === 'case_closed').length;
-  const casesToday = cases.filter(c => new Date(c.start_date).toDateString() === new Date().toDateString()).length;
+  const casesToday = cases.filter(c => c.start_date === new Date().toISOString().split('T')[0]).length;
   
-  const activities = [
-    { 
-      id: 1, 
-      type: 'FIR', 
-      title: 'New FIR Registered: #FIR-2024-0892', 
-      time: '10:45 AM', 
-      desc: 'Assault case reported at Kowdiar Junction. Complainant: Rahul Verma.',
-      tags: ['High Priority', 'Criminal'],
-      icon: <FileText className="w-6 h-6" />,
-      iconBg: 'bg-secondary-fixed text-on-secondary-fixed'
-    },
-    { 
-      id: 2, 
-      type: 'Case', 
-      title: 'Case Status Update: #FIR-2024-0741', 
-      time: '09:12 AM', 
-      desc: 'Theft investigation at Fort Precinct concluded. Property recovered.',
-      tags: ['Resolved'],
+  const activities = firs.slice(0, 3).map((fir, idx) => ({
+    id: fir.fir_id,
+    type: 'FIR',
+    title: `New FIR Registered: ${fir.fir_number}`,
+    time: new Date(fir.created_at || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    desc: `${fir.crime_type?.charAt(0).toUpperCase() + fir.crime_type?.slice(1)} case reported at ${fir.incident_location}.`,
+    tags: idx === 0 ? ['High Priority'] : [],
+    icon: <FileText className="w-6 h-6" />,
+    iconBg: idx === 0 ? 'bg-error-container text-on-error-container' : 'bg-secondary-fixed text-on-secondary-fixed'
+  }));
+
+  if (activities.length === 0) {
+    activities.push({
+      id: 'mock-1',
+      type: 'System',
+      title: 'Database Synchronized',
+      time: 'Just Now',
+      desc: 'System successfully synced with Supabase node.',
+      tags: ['Verified'],
       icon: <CheckCircle2 className="w-6 h-6" />,
       iconBg: 'bg-tertiary-container text-on-tertiary-container'
-    },
-    { 
-      id: 3, 
-      type: 'Report', 
-      title: 'Charge Sheet Filed: #FIR-2024-0556', 
-      time: 'Yesterday', 
-      desc: 'Formal documentation submitted to District Court for the narcotics case.',
-      tags: [],
-      icon: <Clock className="w-6 h-6" />,
-      iconBg: 'bg-primary-container text-on-primary-container'
+    });
+  }
+
+  const handleSyncData = async () => {
+    if (!confirm('This will sync the current demo state with Supabase. Existing records will be updated or created. Proceed?')) return;
+    
+    setSyncing(true);
+    try {
+      const { demoStations, demoOfficers, demoFIRs, demoCases, demoNews } = await import('../lib/demoData');
+      
+      const { error: sErr } = await supabase.from('police_stations').upsert(demoStations, { onConflict: 'station_id' });
+      if (sErr) throw sErr;
+      
+      const { error: oErr } = await supabase.from('officers').upsert(demoOfficers, { onConflict: 'officer_id' });
+      if (oErr) throw oErr;
+      
+      const { error: fErr } = await supabase.from('fir').upsert(demoFIRs, { onConflict: 'fir_id' });
+      if (fErr) throw fErr;
+      
+      const { error: cErr } = await supabase.from('cases').upsert(demoCases, { onConflict: 'case_id' });
+      if (cErr) throw cErr;
+      
+      const { error: nErr } = await supabase.from('news_articles').upsert(demoNews, { onConflict: 'article_id' });
+      if (nErr) throw nErr;
+
+      alert('Database Synchronization Complete.');
+      await refreshData();
+    } catch (err) {
+      console.error('Sync error:', err);
+      alert('Sync failed: ' + err.message);
+    } finally {
+      setSyncing(false);
     }
-  ];
+  };
 
   return (
     <div className="space-y-8">
@@ -111,7 +139,16 @@ const Dashboard = () => {
               <span className="w-2 h-2 bg-primary rounded-full"></span>
               Recent Activity Feed
             </h4>
-            <button className="text-xs font-bold text-secondary hover:underline uppercase tracking-widest">View All Ledger</button>
+            <div className="flex gap-2">
+               <button 
+                onClick={handleSyncData}
+                disabled={syncing}
+                className="text-[10px] font-black text-secondary hover:underline uppercase tracking-widest flex items-center gap-1.5"
+              >
+                <RefreshCw className={`w-3 h-3 ${syncing ? 'animate-spin' : ''}`} />
+                Sync Ledger
+              </button>
+            </div>
           </div>
           
           <div className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_12px_32px_rgba(11,42,74,0.04)]">

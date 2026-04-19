@@ -14,11 +14,45 @@ import {
   Verified
 } from 'lucide-react';
 import { useDatabase } from '../context/DatabaseContext';
+import { supabase } from '../lib/supabase';
 
 const NewsVerification = () => {
-  const { news, loading } = useDatabase();
+  const { news, loading, refreshData } = useDatabase();
 
-  if (loading) return <div className="flex h-64 items-center justify-center">Loading News Feed...</div>;
+  const handleVerify = async (articleId) => {
+    try {
+      const { error } = await supabase
+        .from('news_articles')
+        .update({ verified: true })
+        .eq('article_id', articleId);
+      
+      if (error) throw error;
+      alert('Article verified and marked as legitimate in public ledger.');
+      refreshData();
+    } catch (err) {
+      console.error('Verification error:', err);
+      alert('Failed to verify article: ' + err.message);
+    }
+  };
+
+  const handleDiscard = async (articleId) => {
+    if (!confirm('Are you sure you want to discard this article? It will be removed from the active verification queue.')) return;
+    try {
+      const { error } = await supabase
+        .from('news_articles')
+        .delete()
+        .eq('article_id', articleId);
+      
+      if (error) throw error;
+      alert('Article discarded and removed from entry ledger.');
+      refreshData();
+    } catch (err) {
+      console.error('Discard error:', err);
+      alert('Failed to discard article: ' + err.message);
+    }
+  };
+
+  if (loading) return <div className="flex h-64 items-center justify-center text-secondary font-bold">Loading News Feed...</div>;
   return (
     <div className="space-y-8">
       <header>
@@ -27,9 +61,9 @@ const NewsVerification = () => {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <StatsCard title="Total Pending" value="24" color="text-secondary" />
+        <StatsCard title="Total Pending" value={news.filter(n => !n.verified).length} color="text-secondary" />
         <StatsCard title="High Risk" value="08" color="text-error" bgColor="bg-error-container/20" />
-        <StatsCard title="Verified Today" value="142" color="text-tertiary" bgColor="bg-tertiary-container/10" />
+        <StatsCard title="Verified Today" value={news.filter(n => n.verified).length} color="text-tertiary" bgColor="bg-tertiary-container/10" />
         <StatsCard title="Queue Priority" value="Critical" color="text-white" bgColor="bg-inverse-surface" />
       </div>
 
@@ -53,7 +87,7 @@ const NewsVerification = () => {
       </div>
 
       <div className="space-y-4">
-        {news.slice(0, 5).map((article, idx) => (
+        {news.filter(n => !n.verified).map((article, idx) => (
           <motion.div 
             key={article.article_id}
             initial={{ opacity: 0, x: -20 }}
@@ -83,11 +117,17 @@ const NewsVerification = () => {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button className="bg-tertiary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:brightness-110 transition-all flex items-center gap-2">
+                  <button 
+                    onClick={() => handleVerify(article.article_id)}
+                    className="bg-tertiary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:brightness-110 transition-all flex items-center gap-2"
+                  >
                     <Verified className="w-4 h-4" />
                     Verify
                   </button>
-                  <button className="border border-outline-variant/20 text-on-surface-variant px-5 py-2 rounded-lg text-sm font-semibold hover:bg-surface-container-low transition-all flex items-center gap-2">
+                  <button 
+                    onClick={() => handleDiscard(article.article_id)}
+                    className="border border-outline-variant/20 text-on-surface-variant px-5 py-2 rounded-lg text-sm font-semibold hover:bg-surface-container-low transition-all flex items-center gap-2"
+                  >
                     <XSquare className="w-4 h-4" />
                     Discard
                   </button>
@@ -96,13 +136,19 @@ const NewsVerification = () => {
               <p className="text-on-surface-variant text-sm line-clamp-2 mt-2 leading-relaxed">
                 Reported activity near the case site. Potential misinformation regarding {article.title.toLowerCase()}. Immediate verification required to prevent public panic.
               </p>
-              <div className="mt-auto pt-4 flex gap-3">
+              <div className="mt-auto pt-4 flex {gap-3}">
                 <span className="px-3 py-1 bg-surface-container-low text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Public Order</span>
                 <span className="px-3 py-1 bg-surface-container-low text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Social Media</span>
               </div>
             </div>
           </motion.div>
         ))}
+        {news.filter(n => !n.verified).length === 0 && (
+          <div className="p-12 text-center bg-surface-container-lowest rounded-xl border-2 border-dashed border-outline-variant/20">
+            <Verified className="w-12 h-12 text-tertiary mx-auto mb-4 opacity-20" />
+            <p className="text-on-surface-variant font-medium">All articles in the current queue are verified.</p>
+          </div>
+        )}
       </div>
 
       <div className="mt-10 flex items-center justify-between border-t border-outline-variant/10 pt-6">

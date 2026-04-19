@@ -30,6 +30,14 @@ const FIRManagement = () => {
     { title: 'System Status', value: 'Encrypted', icon: Shield, color: 'text-secondary', sub: 'Last secure sync: 2m ago' },
   ];
 
+  const filteredFirs = React.useMemo(() => {
+    return firs.filter(fir => 
+      fir.fir_number?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      fir.crime_type?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      fir.incident_location?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [firs, searchTerm]);
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -111,7 +119,7 @@ const FIRManagement = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-outline-variant/10">
-              {firs.slice(0, 8).map((fir, idx) => (
+              {filteredFirs.slice(0, 8).map((fir, idx) => (
                 <tr key={fir.fir_id} className={`hover:bg-surface-container-low transition-colors group ${idx % 2 !== 0 ? 'bg-surface-container-low/30' : ''}`}>
                   <td className="px-8 py-5">
                     <p className="font-bold text-on-secondary-fixed-variant">{fir.fir_number}</p>
@@ -124,7 +132,7 @@ const FIRManagement = () => {
                   <td className="px-8 py-5">
                     <div className="flex items-center gap-2">
                       <span className={`w-2 h-2 rounded-full ${fir.crime_type === 'murder' ? 'bg-error' : 'bg-primary'}`}></span>
-                      <p className="text-sm font-medium capitalize">{fir.crime_type.replace('_', ' ')}</p>
+                      <p className="text-sm font-medium capitalize">{fir.crime_type?.replace('_', ' ')}</p>
                     </div>
                   </td>
                   <td className="px-8 py-5">

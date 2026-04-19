@@ -17,8 +17,23 @@ import { useDatabase } from '../context/DatabaseContext';
 const Officers = () => {
   const { officers, stations, loading } = useDatabase();
 
-  if (loading) return <div className="flex h-64 items-center justify-center">Loading Personnel Directory...</div>;
-  
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [stationFilter, setStationFilter] = React.useState('All Stations');
+  const [statusFilter, setStatusFilter] = React.useState('All Statuses');
+
+  const filteredOfficers = React.useMemo(() => {
+    return (officers || []).filter(off => {
+      const matchSearch = off.officer_name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          off.badge_number?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          off.rank?.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const offStation = stations?.find(s => s.station_id === off.station_id)?.station_name || 'Unassigned';
+      const matchStation = stationFilter === 'All Stations' || offStation === stationFilter;
+      
+      return matchSearch && matchStation;
+    });
+  }, [officers, stations, searchTerm, stationFilter]);
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -26,7 +41,7 @@ const Officers = () => {
           <h2 className="text-3xl font-black text-secondary tracking-tighter uppercase mb-1">Officer Directory</h2>
           <div className="flex items-center gap-2">
             <span className="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
-              {officers?.length || 0} Total Personnel
+              {filteredOfficers?.length || 0} Records Found
             </span>
             <p className="text-sm font-medium text-on-surface-variant italic">Verified under State Registry</p>
           </div>
@@ -46,21 +61,31 @@ const Officers = () => {
               className="w-full bg-surface-container-low border-none rounded-lg pl-10 py-3 text-sm focus:ring-1 focus:ring-secondary transition-all outline-none" 
               placeholder="Search by Name, ID or Badge Number..." 
               type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
         <div className="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] border border-outline-variant/5">
           <label className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-3">Station / Unit</label>
-          <select className="w-full bg-surface-container-low border-none rounded-lg py-3 text-sm focus:ring-1 focus:ring-secondary outline-none cursor-pointer">
+          <select 
+            className="w-full bg-surface-container-low border-none rounded-lg py-3 text-sm focus:ring-1 focus:ring-secondary outline-none cursor-pointer"
+            value={stationFilter}
+            onChange={(e) => setStationFilter(e.target.value)}
+          >
             <option>All Stations</option>
             {stations?.map(s => (
-              <option key={s.station_id}>{s.station_name}</option>
+              <option key={s.station_id} value={s.station_name}>{s.station_name}</option>
             ))}
           </select>
         </div>
         <div className="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_12px_32px_rgba(11,42,74,0.04)] border border-outline-variant/5">
           <label className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-3">Duty Status</label>
-          <select className="w-full bg-surface-container-low border-none rounded-lg py-3 text-sm focus:ring-1 focus:ring-secondary outline-none cursor-pointer">
+          <select 
+            className="w-full bg-surface-container-low border-none rounded-lg py-3 text-sm focus:ring-1 focus:ring-secondary outline-none cursor-pointer"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
             <option>All Statuses</option>
             <option>Active</option>
             <option>On Leave</option>
@@ -82,14 +107,14 @@ const Officers = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-outline-variant/10">
-              {officers?.map((officer, idx) => (
+              {filteredOfficers?.map((officer, idx) => (
                 <tr key={officer.officer_id} className={`hover:bg-surface-container-low/50 transition-colors ${idx % 2 !== 0 ? 'bg-surface-container-low/30' : ''}`}>
                   <td className="px-8 py-5">
                     <span className="font-mono text-xs font-bold text-on-surface-variant uppercase">{officer.badge_number}</span>
                   </td>
                   <td className="px-8 py-5">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+                      <div className="w-10 h-10 rounded-full bg-stone-200 flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
                         <img 
                           className="w-full h-full object-cover" 
                           src={`https://i.pravatar.cc/150?u=${officer.officer_id}`}
